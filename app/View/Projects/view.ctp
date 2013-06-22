@@ -42,25 +42,17 @@
 	<?php if (!empty($project['OrderLine'])):?>
 		<table class="table table-striped">
 			<tr>
-				<th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Project Id'); ?></th>
 				<th><?php echo __('Title'); ?></th>
+				<th><?php echo __('Project Id'); ?></th>
 				<th><?php echo __('Order Status Id'); ?></th>
-				<th><?php echo __('Created'); ?></th>
-				<th><?php echo __('Modified'); ?></th>
-				<th><?php echo __('Commnet Modified'); ?></th>
 				<th><?php echo __('Deadline'); ?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
 		<?php foreach ($project['OrderLine'] as $orderLine): ?>
 			<tr>
-				<td><?php echo $orderLine['id'];?></td>
-				<td><?php echo $orderLine['project_id'];?></td>
 				<td><?php echo $orderLine['title'];?></td>
+				<td><?php echo $orderLine['project_id'];?></td>
 				<td><?php echo $orderLine['order_status_id'];?></td>
-				<td><?php echo $orderLine['created'];?></td>
-				<td><?php echo $orderLine['modified'];?></td>
-				<td><?php echo $orderLine['commnet_modified'];?></td>
 				<td><?php echo $orderLine['deadline'];?></td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>
