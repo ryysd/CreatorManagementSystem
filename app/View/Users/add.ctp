@@ -1,23 +1,25 @@
 <div class="row-fluid">
 	<div class="span9">
-		<?php echo $this->BootstrapForm->create('Project', array('class' => 'form-horizontal'));?>
+		<?php echo $this->BootstrapForm->create('User', array('class' => 'form-horizontal'));?>
 			<fieldset>
-				<legend><?php echo __('Add %s', __('Project')); ?></legend>
+				<legend><?php echo __('Add %s', __('User')); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('status', array(
+				echo $this->BootstrapForm->input('username', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('deadline', array(
+				echo $this->BootstrapForm->input('email', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('order_line_id');
-				echo $this->BootstrapForm->input('title', array(
+				echo $this->BootstrapForm->input('password', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('remark');
+				echo $this->BootstrapForm->input('authority', array(
+					'required' => 'required',
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+				);
 				?>
 				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
 			</fieldset>
@@ -27,9 +29,7 @@
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('action' => 'index'));?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('action' => 'index'));?></li>
 		</ul>
 		</div>
 	</div>

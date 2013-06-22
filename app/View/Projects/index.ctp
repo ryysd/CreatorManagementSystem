@@ -6,12 +6,12 @@
 			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
 		</p>
 
-		<table class="table">
+		<table class="table table-striped">
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('status');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('deadline');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('order_detail_id');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('order_line_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('title');?></th>
@@ -23,7 +23,7 @@
 				<td><?php echo h($project['Project']['id']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['status']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
-				<td><?php echo h($project['Project']['order_detail_id']); ?>&nbsp;</td>
+				<td><?php echo h($project['Project']['order_line_id']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['created']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['modified']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['title']); ?>&nbsp;</td>
@@ -44,6 +44,8 @@
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
 	</div>
