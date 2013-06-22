@@ -51,7 +51,7 @@
 				<a class="brand" href="#"><?php echo __('Creator Management System'); ?></a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="/cmffs/projects">Home</a></li>
+						<li><a href="/cmffs/projects">Projects</a></li>
 						<li><a href="/cmffs/users">Users</a></li>
 						<li><a href="#about">About</a></li>
 						<li><a href="#contact">Contact</a></li>

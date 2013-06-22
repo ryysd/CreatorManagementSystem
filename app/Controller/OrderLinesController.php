@@ -55,7 +55,7 @@ class OrderLinesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($project_id = null) {
 		if ($this->request->is('post')) {
 			$this->OrderLine->create();
 			if ($this->OrderLine->save($this->request->data)) {
@@ -67,7 +67,12 @@ class OrderLinesController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				$this->redirect(array('action' => 'index'));
+				if ($project_id != null) {
+				    $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
+				}
+				else {
+				    $this->redirect(array('controller' => 'projects', 'action' => 'index'));
+				}
 			} else {
 				$this->Session->setFlash(
 					__('The %s could not be saved. Please, try again.', __('order line')),
@@ -79,7 +84,12 @@ class OrderLinesController extends AppController {
 				);
 			}
 		}
-		$projects = $this->OrderLine->Project->find('list');
+		if ($project_id != null) {
+		    $projects = $this->OrderLine->Project->find('list', array('conditions' => array('Project.id' => $project_id)));
+		}
+		else { 
+		    $projects = $this->OrderLine->Project->find('list');
+		}
 		$orderStatuses = $this->OrderLine->OrderStatus->find('list');
 		$users = $this->OrderLine->User->find('list');
 		$this->set(compact('projects', 'orderStatuses', 'users'));
@@ -167,14 +177,15 @@ class OrderLinesController extends AppController {
 	    if (!$this->OrderLine->exists()) {
 		throw new NotFoundException(__('Invalid %s', __('order line')));
 	    }
-	    $this->set('orderLine', $this->OrderLine->read(null, $id));
-
-	    $obj = $this->OrderLine->read(null, $id);
+	    $orderLine = $this->OrderLine->read(null, $id);
 
 	    if($this->request->data){
 		// $obj['Attachment'] = $this->request->data['Attachment'];
-		$this->request->data['OrderLine'] = $obj['OrderLine'];
+		$this->request->data['OrderLine'] = $orderLine['OrderLine'];
 		if($this->OrderLine->saveAll($this->request->data)){
+		    echo "<pre>";
+		    print_r($this->OrderLine->findById($id)['Attachment']);
+		    echo "</pre>";
 		    $this->Session->setFlash(
 			__('The image has been uploaded.'),
 			'alert',
