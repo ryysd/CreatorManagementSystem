@@ -19,12 +19,11 @@ class Attachment extends AppModel {
 	    'Upload.Upload' => array(
 		'photo' => array(
 		    'thumbnailSizes' => array(
-			'thumb150' => '150x150',
-			'thumb80' => '80x80',
+			'thumb560' => '560x420',
 		    ),
 		    'thumbnailMethod' => 'php',
 		    'fields' => array('dir' => 'dir', 'type' => 'type', 'size' => 'size'),
-		    'mimetypes' => array('image/jpeg', 'image/gif', 'image/png'),
+		    'mimetypes' => array('image/jpeg', 'image/jpg', 'image/gif', 'image/png'),
 		    'extensions' => array('jpg', 'jpeg', 'JPG', 'JPEG', 'gif', 'GIF', 'png', 'PNG'),
 		    'maxSize' => 2097152, //2MB
 		),

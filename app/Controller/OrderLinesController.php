@@ -56,6 +56,7 @@ class OrderLinesController extends AppController {
 			throw new NotFoundException(__('Invalid %s', __('order line')));
 		}
 		$this->set('orderLine', $this->OrderLine->read(null, $id));
+		$this->set('orderStatuses', $this->OrderLine->OrderStatus->find('list'));
 	}
 
 /**
@@ -203,6 +204,38 @@ class OrderLinesController extends AppController {
 		} else {
 		    $this->Session->setFlash(
 			__('The image could not be uploaded. Please, try again.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-error'
+			)
+		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
+		}
+	    }
+	}
+
+	public function update_status($id = null) {
+	    $this->OrderLine->id = $id;
+	    if (!$this->OrderLine->exists()) {
+		throw new NotFoundException(__('Invalid %s', __('order line')));
+	    }
+	    $orderLine = $this->OrderLine->read(null, $id);
+
+	    if($this->request->data){
+		if($this->OrderLine->saveField('order_status_id' ,$this->request->data['OrderLine']['order_status_id'])){
+		    $this->Session->setFlash(
+			__('The status has been updated.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-success'
+			)
+		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
+		} else {
+		    $this->Session->setFlash(
+			__('The status could not be updated. Please, try again.'),
 			'alert',
 			array(
 			    'plugin' => 'TwitterBootstrap',

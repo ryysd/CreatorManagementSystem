@@ -38,21 +38,57 @@ _EOT_;
   </div>
 <?php
 for ($i = 0; $i < $photo_num; $i++) { 
-  $path = $this->webroot.APP_DIR."/".WEBROOT_DIR."/files/attachment/photo/".$orderLine['Attachment'][$i]['dir']."/".$orderLine['Attachment'][$i]['photo'];
-  echo <<< _EOT_
-  <div class="tab-pane" id="tab$i">
-   <p>tab$i</p>
-   <img src="$path">
-  </div>
+    $dir = $this->webroot.APP_DIR."/".WEBROOT_DIR."/files/attachment/photo/".$orderLine['Attachment'][$i]['dir'];
+    $org_image = $dir."/".$orderLine['Attachment'][$i]['photo'];
+    $thumb_image = $dir."/thumb560_".$orderLine['Attachment'][$i]['photo'];
+    echo <<< _EOT_
+	<div class="tab-pane" id="tab$i">
+	<p>tab$i</p>
+	<ul class="thumbnails">
+	<li class="span6">
+	<a href="$org_image" class="thumbnail">
+	<img data-src="holder.js/560x420" src="$org_image" alt="">
+	</a>
+	</li>
 _EOT_;
+    echo "<li class =\"span4\">";
+    echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine', 'action' => 'update_status'."/".$orderLine['OrderLine']['id'], 'class' => 'form-horizontal'));
+    echo "<fieldset>";
+    echo "<table class=\"table table-striped\">";
+    echo "<td>";
+    echo $this->BootstrapForm->input('order_status_id', array(
+	'options' => $orderStatuses)
+    );
+    //echo $this->BootstrapForm->submit(__('Submit'));
+    echo "</td>";
+    echo "<td>";
+    echo "<div align=\"center\">";
+    echo "<button type=\"submit\" class=\"btn\">Update</button>";
+    echo "</div>";
+    echo "</td>";
+    echo "</table>";
+    echo "</fieldset>";
+    echo $this->BootstrapForm->end();
+    echo "</li>";
+    echo "</div>";
 }
 ?>
+</ul>
+
  </div>
 </div>
-<?php echo $this->Form->create('OrderLine', array('controller' => 'OrderLine','action' => 'upload'."/".$orderLine['OrderLine']['id'], 'type' => 'file', )); ?>
-<?php echo $this->Form->input('Attachment.0.photo', array('type' => 'file')); ?>
-<?php echo $this->Form->hidden('Attachment.0.model', array('value'=>'OrderLine'));?>
-<?php echo $this->Form->end(__('Upload'));  ?>
+<?php
+echo "<table class=\"table table-striped\">";
+echo "<td>";
+echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine','action' => 'upload'."/".$orderLine['OrderLine']['id'], 'type' => 'file', ));
+echo $this->BootstrapForm->input('Attachment.0.photo', array('type' => 'file'));
+echo $this->BootstrapForm->hidden('Attachment.0.model', array('value'=>'OrderLine'));
+echo "<div>";
+echo "<button type=\"submit\" class=\"btn\">Update</button>";
+echo "</div>";
+echo "</td>";
+echo "</table>";
+?>
 </div>
 
 <div class="row-fluid">
