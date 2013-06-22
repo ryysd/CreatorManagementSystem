@@ -25,7 +25,15 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Session');
+	public $components = Array(
+	    'Session',
+	    'Auth' => Array(
+		'loginRedirect' => Array('controller'  => 'projects', 'action' => 'index'),
+		'logoutRedirect' => Array('controller' => 'admin', 'action' => 'login'),
+		'loginAction' => Array('controller' => 'admin', 'action' => 'login'),
+		'authenticate' => Array('Form' => Array('fields' => Array('username' => 'email')))
+	    )
+	);
 /**
  * index method
  *
@@ -79,8 +87,8 @@ class UsersController extends AppController {
 				);
 			}
 		}
-		$authorities = $this->User->Authority->find('list');
-		$this->set(compact('authorities'));
+		$roles = $this->User->Role->find('list');
+		$this->set(compact('roles'));
 	}
 
 /**
@@ -118,8 +126,8 @@ class UsersController extends AppController {
 		} else {
 			$this->request->data = $this->User->read(null, $id);
 		}
-		$authorities = $this->User->Authority->find('list');
-		$this->set(compact('authorities'));
+		$roles = $this->User->Role->find('list');
+		$this->set(compact('roles'));
 	}
 
 /**

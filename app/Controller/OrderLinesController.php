@@ -25,7 +25,15 @@ class OrderLinesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Session');
+	public $components = Array(
+	    'Session',
+	    'Auth' => Array(
+		'loginRedirect' => Array('controller'  => 'projects', 'action' => 'index'),
+		'logoutRedirect' => Array('controller' => 'admin', 'action' => 'login'),
+		'loginAction' => Array('controller' => 'admin', 'action' => 'login'),
+		'authenticate' => Array('Form' => Array('fields' => Array('username' => 'email')))
+	    )
+	);
 /**
  * index method
  *

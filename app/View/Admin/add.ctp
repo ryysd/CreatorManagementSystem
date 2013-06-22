@@ -21,7 +21,7 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				?>
-				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
+				<?php echo $this->BootstrapForm->submit(__('アカウントを作成する'));?>
 			</fieldset>
 		<?php echo $this->BootstrapForm->end();?>
 	</div>

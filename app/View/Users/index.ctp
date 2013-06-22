@@ -10,7 +10,7 @@
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('name');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('email');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('authority_id');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('role_id');?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
 		<?php foreach ($users as $user): ?>
@@ -20,7 +20,7 @@
 				</td>
 				<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
 				<td>
-					<?php echo h($user['Authority']['name']); ?>
+					<?php echo h($user['Role']['name']); ?>
 				</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>

@@ -1,13 +1,11 @@
 <div class="row-fluid">
 	<div class="span9">
+            <?php echo $this->Session->flash('auth'); ?>
+            <?php echo $this->Form->create('User', Array('url' => '/admin/login')); ?>
 		<?php echo $this->BootstrapForm->create('User', array('class' => 'form-horizontal'));?>
 			<fieldset>
-				<legend><?php echo __('Add %s', __('User')); ?></legend>
+				<legend><?php echo __('Login'); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('name', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
 				echo $this->BootstrapForm->input('email', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
@@ -16,13 +14,10 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('role_id', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
 				?>
-				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
+				<?php echo $this->BootstrapForm->submit(__('ログイン'));?>
 			</fieldset>
 		<?php echo $this->BootstrapForm->end();?>
 	</div>
 </div>
+

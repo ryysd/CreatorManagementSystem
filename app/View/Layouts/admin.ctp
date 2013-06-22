@@ -42,7 +42,7 @@
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
-			<div class="container-fluid">
+			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -53,27 +53,10 @@
 					<ul class="nav">
 						<li><a href="/cmffs/projects">Projects</a></li>
 						<li><a href="/cmffs/users">Users</a></li>
-                                                        <?php
-                	                                if(isset($authUser)) {
-                	                                        echo "<li><a href=\"/cmffs/admin/logout\">Logout</a></li>";
-                					}
-							else {
-							    echo "<li><a href=\"/cmffs/admin/login\">Login</a></li>";
-                	                                    echo "<li><a href=\"/cmffs/admin/add\">Registration</a></li>";
-							}
-                                                        ?>
 						<li><a href="#about">About</a></li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
-                                <div class="notices pull-right">
-                                        <?php
-	                                if(isset($authUser)) {
-	                                        echo "<p class=\"navbar-text\">".$authUser['name']."</p>";
-					}
-	                                else echo "<p class=\"navbar-text\">Guest</p>"
-                                        ?>
-                                </div>
 			</div>
 		</div>
 	</div>
@@ -97,3 +80,4 @@
 
 </body>
 </html>
+

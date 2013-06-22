@@ -40,4 +40,10 @@ class AppController extends Controller {
     );
 
     public $layout = 'TwitterBootstrap.default';
+
+    function beforeFilter() {
+	if(isset($this->Auth)) {
+	    $this->set('authUser', $this->Auth->user());
+	}
+    }
 }
