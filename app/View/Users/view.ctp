@@ -1,6 +1,6 @@
 <div class="row-fluid">
 	<div class="span9">
-		<h2><?php  echo __('User');?></h2>
+		<h2><?php echo h($user['User']['name']); ?></h2>
 		<dl>
 			<dt><?php echo __('Id'); ?></dt>
 			<dd>
@@ -22,9 +22,9 @@
 				<?php echo h($user['User']['password']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Authority'); ?></dt>
+			<dt><?php echo __('Role'); ?></dt>
 			<dd>
-				<?php echo $this->Html->link($user['Authority']['name'], array('controller' => 'authorities', 'action' => 'view', $user['Authority']['id'])); ?>
+				<?php echo h($user['Role']['name']); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Created'); ?></dt>
