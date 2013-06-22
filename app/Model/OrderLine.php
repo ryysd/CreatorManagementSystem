@@ -62,18 +62,12 @@ class OrderLine extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Illust' => array(
-			'className' => 'Illust',
-			'foreignKey' => 'order_line_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+		'Attachment' => array(
+		    'className' => 'Attachment',
+		    'foreignKey' => 'foreign_key',
+		    'conditions' => array(
+			'Attachment.model' => 'OrderLine',
+		    ),
 		)
 	);
 

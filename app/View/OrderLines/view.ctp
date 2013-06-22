@@ -58,8 +58,6 @@
 			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Illusts')), array('controller' => 'illusts', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		</ul>
@@ -106,37 +104,7 @@
 		</ul>
 	</div>
 </div>
-<div class="row-fluid">
-	<div class="span9">
-		<h3><?php echo __('Related %s', __('Illusts')); ?></h3>
-	<?php if (!empty($orderLine['Illust'])):?>
-		<table class="table table-striped">
-			<tr>
-				<th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Order Line Id'); ?></th>
-				<th class="actions"><?php echo __('Actions');?></th>
-			</tr>
-		<?php foreach ($orderLine['Illust'] as $illust): ?>
-			<tr>
-				<td><?php echo $illust['id'];?></td>
-				<td><?php echo $illust['order_line_id'];?></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'illusts', 'action' => 'view', $illust['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'illusts', 'action' => 'edit', $illust['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'illusts', 'action' => 'delete', $illust['id']), null, __('Are you sure you want to delete # %s?', $illust['id'])); ?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		</table>
-	<?php endif; ?>
-
-	</div>
-	<div class="span3">
-		<ul class="nav nav-list">
-			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
-</div>
+ 
 <div class="row-fluid">
 	<div class="span9">
 		<h3><?php echo __('Related %s', __('Users')); ?></h3>

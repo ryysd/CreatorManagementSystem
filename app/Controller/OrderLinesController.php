@@ -161,4 +161,38 @@ class OrderLinesController extends AppController {
 		);
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function upload($id = null) {
+	    $this->OrderLine->id = $id;
+	    if (!$this->OrderLine->exists()) {
+		throw new NotFoundException(__('Invalid %s', __('order line')));
+	    }
+	    $this->set('orderLine', $this->OrderLine->read(null, $id));
+
+	    $obj = $this->OrderLine->read(null, $id);
+
+	    if($this->request->data){
+		// $obj['Attachment'] = $this->request->data['Attachment'];
+		$this->request->data['OrderLine'] = $obj['OrderLine'];
+		if($this->OrderLine->saveAll($this->request->data)){
+		    $this->Session->setFlash(
+			__('The image has been uploaded.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-success'
+			)
+		    );
+		} else {
+		    $this->Session->setFlash(
+			__('The image could not be uploaded. Please, try again.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-error'
+			)
+		    );
+		}
+	    }
+	}
 }
