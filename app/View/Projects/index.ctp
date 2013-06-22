@@ -11,7 +11,6 @@
 				<th><?php echo $this->BootstrapPaginator->sort('id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('project_status_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('deadline');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('order_line_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('title');?></th>
@@ -25,7 +24,6 @@
 					<?php echo $this->Html->link($project['ProjectStatus']['name'], array('controller' => 'project_statuses', 'action' => 'view', $project['ProjectStatus']['id'])); ?>
 				</td>
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
-				<td><?php echo h($project['Project']['order_line_id']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['created']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['modified']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['title']); ?>&nbsp;</td>

@@ -17,11 +17,6 @@
 				<?php echo h($project['Project']['deadline']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Order Line Id'); ?></dt>
-			<dd>
-				<?php echo h($project['Project']['order_line_id']); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('Created'); ?></dt>
 			<dd>
 				<?php echo h($project['Project']['created']); ?>
@@ -70,10 +65,7 @@
 				<th><?php echo __('Id'); ?></th>
 				<th><?php echo __('Project Id'); ?></th>
 				<th><?php echo __('Title'); ?></th>
-				<th><?php echo __('User Id'); ?></th>
-				<th><?php echo __('Illust Id'); ?></th>
 				<th><?php echo __('Order Status Id'); ?></th>
-				<th><?php echo __('Comment Id'); ?></th>
 				<th><?php echo __('Created'); ?></th>
 				<th><?php echo __('Modified'); ?></th>
 				<th><?php echo __('Commnet Modified'); ?></th>
@@ -85,10 +77,7 @@
 				<td><?php echo $orderLine['id'];?></td>
 				<td><?php echo $orderLine['project_id'];?></td>
 				<td><?php echo $orderLine['title'];?></td>
-				<td><?php echo $orderLine['user_id'];?></td>
-				<td><?php echo $orderLine['illust_id'];?></td>
 				<td><?php echo $orderLine['order_status_id'];?></td>
-				<td><?php echo $orderLine['comment_id'];?></td>
 				<td><?php echo $orderLine['created'];?></td>
 				<td><?php echo $orderLine['modified'];?></td>
 				<td><?php echo $orderLine['commnet_modified'];?></td>

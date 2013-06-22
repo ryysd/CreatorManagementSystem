@@ -14,7 +14,6 @@
 				<th><?php echo $this->BootstrapPaginator->sort('password');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('authority_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('order_line_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
@@ -28,9 +27,6 @@
 					<?php echo $this->Html->link($user['Authority']['name'], array('controller' => 'authorities', 'action' => 'view', $user['Authority']['id'])); ?>
 				</td>
 				<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link($user['OrderLine']['title'], array('controller' => 'order_lines', 'action' => 'view', $user['OrderLine']['id'])); ?>
-				</td>
 				<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
@@ -50,8 +46,6 @@
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('action' => 'add')); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Authorities')), array('controller' => 'authorities', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Authority')), array('controller' => 'authorities', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
 	</div>

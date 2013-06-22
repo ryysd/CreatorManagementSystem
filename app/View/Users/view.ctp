@@ -32,11 +32,6 @@
 				<?php echo h($user['User']['created']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Order Line'); ?></dt>
-			<dd>
-				<?php echo $this->Html->link($user['OrderLine']['title'], array('controller' => 'order_lines', 'action' => 'view', $user['OrderLine']['id'])); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('Modified'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['modified']); ?>
@@ -54,8 +49,6 @@
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Authorities')), array('controller' => 'authorities', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Authority')), array('controller' => 'authorities', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
 	</div>

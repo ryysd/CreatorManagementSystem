@@ -80,8 +80,7 @@ class UsersController extends AppController {
 			}
 		}
 		$authorities = $this->User->Authority->find('list');
-		$orderLines = $this->User->OrderLine->find('list');
-		$this->set(compact('authorities', 'orderLines'));
+		$this->set(compact('authorities'));
 	}
 
 /**
@@ -120,8 +119,7 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->read(null, $id);
 		}
 		$authorities = $this->User->Authority->find('list');
-		$orderLines = $this->User->OrderLine->find('list');
-		$this->set(compact('authorities', 'orderLines'));
+		$this->set(compact('authorities'));
 	}
 
 /**

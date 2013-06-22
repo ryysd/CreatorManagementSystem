@@ -3,12 +3,11 @@ App::uses('AppModel', 'Model');
 /**
  * OrderLine Model
  *
- * @property User $User
  * @property Project $Project
  * @property OrderStatus $OrderStatus
  * @property Comment $Comment
  * @property Illust $Illust
- * @property Project $Project
+ * @property User $User
  */
 class OrderLine extends AppModel {
 
@@ -21,21 +20,6 @@ class OrderLine extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-/**
- * hasOne associations
- *
- * @var array
- */
-	public $hasOne = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'order_line_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
 
 /**
  * belongsTo associations
@@ -90,6 +74,30 @@ class OrderLine extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		)
+	);
+
+
+/**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+	public $hasAndBelongsToMany = array(
+		'User' => array(
+			'className' => 'User',
+			'joinTable' => 'order_lines_users',
+			'foreignKey' => 'order_line_id',
+			'associationForeignKey' => 'user_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model');
  * User Model
  *
  * @property Authority $Authority
- * @property OrderLine $OrderLine
  */
 class User extends AppModel {
 
@@ -27,13 +26,6 @@ class User extends AppModel {
 		'Authority' => array(
 			'className' => 'Authority',
 			'foreignKey' => 'authority_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'OrderLine' => array(
-			'className' => 'OrderLine',
-			'foreignKey' => 'order_line_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
