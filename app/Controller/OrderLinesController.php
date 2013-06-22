@@ -191,9 +191,6 @@ class OrderLinesController extends AppController {
 		// $obj['Attachment'] = $this->request->data['Attachment'];
 		$this->request->data['OrderLine'] = $orderLine['OrderLine'];
 		if($this->OrderLine->saveAll($this->request->data)){
-		    echo "<pre>";
-		    print_r($this->OrderLine->findById($id)['Attachment']);
-		    echo "</pre>";
 		    $this->Session->setFlash(
 			__('The image has been uploaded.'),
 			'alert',
@@ -202,6 +199,7 @@ class OrderLinesController extends AppController {
 			    'class' => 'alert-success'
 			)
 		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		} else {
 		    $this->Session->setFlash(
 			__('The image could not be uploaded. Please, try again.'),
@@ -211,6 +209,7 @@ class OrderLinesController extends AppController {
 			    'class' => 'alert-error'
 			)
 		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		}
 	    }
 	}

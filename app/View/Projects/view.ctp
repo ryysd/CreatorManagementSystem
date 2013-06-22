@@ -1,12 +1,7 @@
 <div class="row-fluid">
 	<div class="span9">
-		<h2><?php  echo __('Project');?></h2>
+		<h2><?php  echo h($project['Project']['title']);?></h2>
 		<dl>
-			<dt><?php echo __('Title'); ?></dt>
-			<dd>
-				<?php echo h($project['Project']['title']); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('Project Status'); ?></dt>
 			<dd>
 				<?php echo h($project['ProjectStatus']['name']); ?>

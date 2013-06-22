@@ -1,40 +1,15 @@
 <div class="row-fluid">
 	<div class="span9">
-		<h2><?php  echo __('Order Line');?></h2>
+		<h2><?php echo h($orderLine['OrderLine']['title']); ?></h2>
 		<dl>
-			<dt><?php echo __('Id'); ?></dt>
-			<dd>
-				<?php echo h($orderLine['OrderLine']['id']); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('Project'); ?></dt>
 			<dd>
 				<?php echo $this->Html->link($orderLine['Project']['title'], array('controller' => 'projects', 'action' => 'view', $orderLine['Project']['id'])); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Title'); ?></dt>
-			<dd>
-				<?php echo h($orderLine['OrderLine']['title']); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('Order Status'); ?></dt>
 			<dd>
 				<?php echo $this->Html->link($orderLine['OrderStatus']['name'], array('controller' => 'order_statuses', 'action' => 'view', $orderLine['OrderStatus']['id'])); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Created'); ?></dt>
-			<dd>
-				<?php echo h($orderLine['OrderLine']['created']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Modified'); ?></dt>
-			<dd>
-				<?php echo h($orderLine['OrderLine']['modified']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Commnet Modified'); ?></dt>
-			<dd>
-				<?php echo h($orderLine['OrderLine']['commnet_modified']); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Deadline'); ?></dt>
@@ -44,25 +19,40 @@
 			</dd>
 		</dl>
 	</div>
-	<div class="span3">
-		<div class="well" style="padding: 8px 0; margin-top:8px;">
-		<ul class="nav nav-list">
-			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Html->link(__('Edit %s', __('Order Line')), array('action' => 'edit', $orderLine['OrderLine']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink(__('Delete %s', __('Order Line')), array('action' => 'delete', $orderLine['OrderLine']['id']), null, __('Are you sure you want to delete # %s?', $orderLine['OrderLine']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('controller' => 'projects', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Statuses')), array('controller' => 'order_statuses', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		</ul>
-		</div>
-	</div>
+</div>
+
+<div class="row-fluid">
+<div class="tabbable">
+ <ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Main</a></li>
+<?php
+$photo_num = count($orderLine['Attachment']);
+for ($i = 0; $i < $photo_num; $i++) { echo <<< _EOT_
+	<li><a href="#tab$i" data-toggle="tab">Sub-$i</a></li>
+_EOT_;
+}
+?>
+ </ul>
+ <div id="photo-tab-content" class="tab-content">
+  <div class="tab-pane active" id="home">
+  </div>
+<?php
+for ($i = 0; $i < $photo_num; $i++) { 
+  $path = $this->webroot.APP_DIR."/".WEBROOT_DIR."/files/attachment/photo/".$orderLine['Attachment'][$i]['dir']."/".$orderLine['Attachment'][$i]['photo'];
+  echo <<< _EOT_
+  <div class="tab-pane" id="tab$i">
+   <p>tab$i</p>
+   <img src="$path">
+  </div>
+_EOT_;
+}
+?>
+ </div>
+</div>
+<?php echo $this->Form->create('OrderLine', array('controller' => 'OrderLine','action' => 'upload'."/".$orderLine['OrderLine']['id'], 'type' => 'file', )); ?>
+<?php echo $this->Form->input('Attachment.0.photo', array('type' => 'file')); ?>
+<?php echo $this->Form->hidden('Attachment.0.model', array('value'=>'OrderLine'));?>
+<?php echo $this->Form->end(__('Upload'));  ?>
 </div>
 
 <div class="row-fluid">
