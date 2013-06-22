@@ -3,6 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Project Model
  *
+ * @property ProjectStatus $ProjectStatus
  * @property OrderLine $OrderLine
  */
 class Project extends AppModel {
@@ -16,6 +17,21 @@ class Project extends AppModel {
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'ProjectStatus' => array(
+			'className' => 'ProjectStatus',
+			'foreignKey' => 'project_status_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 /**
  * hasMany associations

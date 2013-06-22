@@ -9,7 +9,7 @@
 		<table class="table table-striped">
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('status');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('project_status_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('deadline');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('order_line_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
@@ -21,7 +21,9 @@
 		<?php foreach ($projects as $project): ?>
 			<tr>
 				<td><?php echo h($project['Project']['id']); ?>&nbsp;</td>
-				<td><?php echo h($project['Project']['status']); ?>&nbsp;</td>
+				<td>
+					<?php echo $this->Html->link($project['ProjectStatus']['name'], array('controller' => 'project_statuses', 'action' => 'view', $project['ProjectStatus']['id'])); ?>
+				</td>
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['order_line_id']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['created']); ?>&nbsp;</td>
@@ -44,6 +46,8 @@
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Project Statuses')), array('controller' => 'project_statuses', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Project Status')), array('controller' => 'project_statuses', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>

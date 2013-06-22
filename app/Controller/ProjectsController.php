@@ -79,6 +79,8 @@ class ProjectsController extends AppController {
 				);
 			}
 		}
+		$projectStatuses = $this->Project->ProjectStatus->find('list');
+		$this->set(compact('projectStatuses'));
 	}
 
 /**
@@ -116,6 +118,8 @@ class ProjectsController extends AppController {
 		} else {
 			$this->request->data = $this->Project->read(null, $id);
 		}
+		$projectStatuses = $this->Project->ProjectStatus->find('list');
+		$this->set(compact('projectStatuses'));
 	}
 
 /**

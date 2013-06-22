@@ -7,9 +7,9 @@
 				<?php echo h($user['User']['id']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Username'); ?></dt>
+			<dt><?php echo __('Name'); ?></dt>
 			<dd>
-				<?php echo h($user['User']['username']); ?>
+				<?php echo h($user['User']['name']); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Email'); ?></dt>
@@ -24,12 +24,22 @@
 			</dd>
 			<dt><?php echo __('Authority'); ?></dt>
 			<dd>
-				<?php echo h($user['User']['authority']); ?>
+				<?php echo $this->Html->link($user['Authority']['name'], array('controller' => 'authorities', 'action' => 'view', $user['Authority']['id'])); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Created'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['created']); ?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Order Line'); ?></dt>
+			<dd>
+				<?php echo $this->Html->link($user['OrderLine']['title'], array('controller' => 'order_lines', 'action' => 'view', $user['OrderLine']['id'])); ?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Modified'); ?></dt>
+			<dd>
+				<?php echo h($user['User']['modified']); ?>
 				&nbsp;
 			</dd>
 		</dl>
@@ -42,6 +52,10 @@
 			<li><?php echo $this->Form->postLink(__('Delete %s', __('User')), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Authorities')), array('controller' => 'authorities', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Authority')), array('controller' => 'authorities', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
 	</div>

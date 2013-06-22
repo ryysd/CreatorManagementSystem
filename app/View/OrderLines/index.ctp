@@ -13,7 +13,7 @@
 				<th><?php echo $this->BootstrapPaginator->sort('title');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('user_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('illust_id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('status');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('order_status_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('comment_id');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
@@ -30,7 +30,9 @@
 				<td><?php echo h($orderLine['OrderLine']['title']); ?>&nbsp;</td>
 				<td><?php echo h($orderLine['OrderLine']['user_id']); ?>&nbsp;</td>
 				<td><?php echo h($orderLine['OrderLine']['illust_id']); ?>&nbsp;</td>
-				<td><?php echo h($orderLine['OrderLine']['status']); ?>&nbsp;</td>
+				<td>
+					<?php echo $this->Html->link($orderLine['OrderStatus']['name'], array('controller' => 'order_statuses', 'action' => 'view', $orderLine['OrderStatus']['id'])); ?>
+				</td>
 				<td><?php echo h($orderLine['OrderLine']['comment_id']); ?>&nbsp;</td>
 				<td><?php echo h($orderLine['OrderLine']['created']); ?>&nbsp;</td>
 				<td><?php echo h($orderLine['OrderLine']['modified']); ?>&nbsp;</td>
@@ -54,10 +56,12 @@
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('action' => 'add')); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('controller' => 'projects', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Order Statuses')), array('controller' => 'order_statuses', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Illusts')), array('controller' => 'illusts', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add')); ?> </li>
 		</ul>

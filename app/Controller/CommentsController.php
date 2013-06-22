@@ -1,11 +1,11 @@
 <?php
 App::uses('AppController', 'Controller');
 /**
- * Users Controller
+ * Comments Controller
  *
- * @property User $User
+ * @property Comment $Comment
  */
-class UsersController extends AppController {
+class CommentsController extends AppController {
 
 /**
  *  Layout
@@ -32,8 +32,8 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		$this->Comment->recursive = 0;
+		$this->set('comments', $this->paginate());
 	}
 
 /**
@@ -43,11 +43,11 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid %s', __('user')));
+		$this->Comment->id = $id;
+		if (!$this->Comment->exists()) {
+			throw new NotFoundException(__('Invalid %s', __('comment')));
 		}
-		$this->set('user', $this->User->read(null, $id));
+		$this->set('comment', $this->Comment->read(null, $id));
 	}
 
 /**
@@ -57,10 +57,10 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->User->create();
-			if ($this->User->save($this->request->data)) {
+			$this->Comment->create();
+			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(
-					__('The %s has been saved', __('user')),
+					__('The %s has been saved', __('comment')),
 					'alert',
 					array(
 						'plugin' => 'TwitterBootstrap',
@@ -70,7 +70,7 @@ class UsersController extends AppController {
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(
-					__('The %s could not be saved. Please, try again.', __('user')),
+					__('The %s could not be saved. Please, try again.', __('comment')),
 					'alert',
 					array(
 						'plugin' => 'TwitterBootstrap',
@@ -79,9 +79,8 @@ class UsersController extends AppController {
 				);
 			}
 		}
-		$authorities = $this->User->Authority->find('list');
-		$orderLines = $this->User->OrderLine->find('list');
-		$this->set(compact('authorities', 'orderLines'));
+		$orderLines = $this->Comment->OrderLine->find('list');
+		$this->set(compact('orderLines'));
 	}
 
 /**
@@ -91,14 +90,14 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid %s', __('user')));
+		$this->Comment->id = $id;
+		if (!$this->Comment->exists()) {
+			throw new NotFoundException(__('Invalid %s', __('comment')));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->User->save($this->request->data)) {
+			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(
-					__('The %s has been saved', __('user')),
+					__('The %s has been saved', __('comment')),
 					'alert',
 					array(
 						'plugin' => 'TwitterBootstrap',
@@ -108,7 +107,7 @@ class UsersController extends AppController {
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(
-					__('The %s could not be saved. Please, try again.', __('user')),
+					__('The %s could not be saved. Please, try again.', __('comment')),
 					'alert',
 					array(
 						'plugin' => 'TwitterBootstrap',
@@ -117,11 +116,10 @@ class UsersController extends AppController {
 				);
 			}
 		} else {
-			$this->request->data = $this->User->read(null, $id);
+			$this->request->data = $this->Comment->read(null, $id);
 		}
-		$authorities = $this->User->Authority->find('list');
-		$orderLines = $this->User->OrderLine->find('list');
-		$this->set(compact('authorities', 'orderLines'));
+		$orderLines = $this->Comment->OrderLine->find('list');
+		$this->set(compact('orderLines'));
 	}
 
 /**
@@ -134,13 +132,13 @@ class UsersController extends AppController {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid %s', __('user')));
+		$this->Comment->id = $id;
+		if (!$this->Comment->exists()) {
+			throw new NotFoundException(__('Invalid %s', __('comment')));
 		}
-		if ($this->User->delete()) {
+		if ($this->Comment->delete()) {
 			$this->Session->setFlash(
-				__('The %s deleted', __('user')),
+				__('The %s deleted', __('comment')),
 				'alert',
 				array(
 					'plugin' => 'TwitterBootstrap',
@@ -150,7 +148,7 @@ class UsersController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(
-			__('The %s was not deleted', __('user')),
+			__('The %s was not deleted', __('comment')),
 			'alert',
 			array(
 				'plugin' => 'TwitterBootstrap',

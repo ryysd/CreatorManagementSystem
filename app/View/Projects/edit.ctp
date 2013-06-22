@@ -4,7 +4,7 @@
 			<fieldset>
 				<legend><?php echo __('Edit %s', __('Project')); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('status', array(
+				echo $this->BootstrapForm->input('project_status_id', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
@@ -30,6 +30,8 @@
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
 			<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Project.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Project.id'))); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('action' => 'index'));?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Project Statuses')), array('controller' => 'project_statuses', 'action' => 'index')); ?></li>
+			<li><?php echo $this->Html->link(__('New %s', __('Project Status')), array('controller' => 'project_statuses', 'action' => 'add')); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?></li>
 		</ul>

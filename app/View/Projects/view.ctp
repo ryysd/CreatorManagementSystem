@@ -7,9 +7,9 @@
 				<?php echo h($project['Project']['id']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Status'); ?></dt>
+			<dt><?php echo __('Project Status'); ?></dt>
 			<dd>
-				<?php echo h($project['Project']['status']); ?>
+				<?php echo $this->Html->link($project['ProjectStatus']['name'], array('controller' => 'project_statuses', 'action' => 'view', $project['ProjectStatus']['id'])); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Deadline'); ?></dt>
@@ -52,6 +52,8 @@
 			<li><?php echo $this->Form->postLink(__('Delete %s', __('Project')), array('action' => 'delete', $project['Project']['id']), null, __('Are you sure you want to delete # %s?', $project['Project']['id'])); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Project Statuses')), array('controller' => 'project_statuses', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Project Status')), array('controller' => 'project_statuses', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
 		</ul>
@@ -70,7 +72,7 @@
 				<th><?php echo __('Title'); ?></th>
 				<th><?php echo __('User Id'); ?></th>
 				<th><?php echo __('Illust Id'); ?></th>
-				<th><?php echo __('Status'); ?></th>
+				<th><?php echo __('Order Status Id'); ?></th>
 				<th><?php echo __('Comment Id'); ?></th>
 				<th><?php echo __('Created'); ?></th>
 				<th><?php echo __('Modified'); ?></th>
@@ -85,7 +87,7 @@
 				<td><?php echo $orderLine['title'];?></td>
 				<td><?php echo $orderLine['user_id'];?></td>
 				<td><?php echo $orderLine['illust_id'];?></td>
-				<td><?php echo $orderLine['status'];?></td>
+				<td><?php echo $orderLine['order_status_id'];?></td>
 				<td><?php echo $orderLine['comment_id'];?></td>
 				<td><?php echo $orderLine['created'];?></td>
 				<td><?php echo $orderLine['modified'];?></td>

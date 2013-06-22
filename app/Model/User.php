@@ -3,10 +3,17 @@ App::uses('AppModel', 'Model');
 /**
  * User Model
  *
- * @property OriderLine $OriderLine
- * @property Comment $Comment
+ * @property Authority $Authority
+ * @property OrderLine $OrderLine
  */
 class User extends AppModel {
+
+/**
+ * Display field
+ *
+ * @var string
+ */
+	public $displayField = 'name';
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -17,34 +24,19 @@ class User extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'OriderLine' => array(
-			'className' => 'OriderLine',
-			'foreignKey' => 'orider_line_id',
+		'Authority' => array(
+			'className' => 'Authority',
+			'foreignKey' => 'authority_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'OrderLine' => array(
+			'className' => 'OrderLine',
+			'foreignKey' => 'order_line_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
 	);
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'Comment' => array(
-			'className' => 'Comment',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-
 }

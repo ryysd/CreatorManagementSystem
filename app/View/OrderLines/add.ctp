@@ -14,7 +14,7 @@
 				);
 				echo $this->BootstrapForm->input('user_id');
 				echo $this->BootstrapForm->input('illust_id');
-				echo $this->BootstrapForm->input('status', array(
+				echo $this->BootstrapForm->input('order_status_id', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
@@ -39,10 +39,12 @@
 			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('action' => 'index'));?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('controller' => 'projects', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add')); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Order Statuses')), array('controller' => 'order_statuses', 'action' => 'index')); ?></li>
+			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?></li>
+			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?></li>
 			<li><?php echo $this->Html->link(__('List %s', __('Illusts')), array('controller' => 'illusts', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add')); ?></li>
 		</ul>

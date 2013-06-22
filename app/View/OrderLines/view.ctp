@@ -27,9 +27,9 @@
 				<?php echo h($orderLine['OrderLine']['illust_id']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Status'); ?></dt>
+			<dt><?php echo __('Order Status'); ?></dt>
 			<dd>
-				<?php echo h($orderLine['OrderLine']['status']); ?>
+				<?php echo $this->Html->link($orderLine['OrderStatus']['name'], array('controller' => 'order_statuses', 'action' => 'view', $orderLine['OrderStatus']['id'])); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Comment Id'); ?></dt>
@@ -69,14 +69,71 @@
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('controller' => 'projects', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Order Statuses')), array('controller' => 'order_statuses', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Illusts')), array('controller' => 'illusts', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span9">
+		<h3><?php echo __('Related %s', __('Users')); ?></h3>
+	<?php if (!empty($orderLine['User'])):?>
+		<dl>
+			<dt><?php echo __('Id'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['id'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Name'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['name'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Email'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['email'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Password'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['password'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Authority Id'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['authority_id'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Created'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['created'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Order Line Id'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['order_line_id'];?>
+				&nbsp;
+			</dd>
+			<dt><?php echo __('Modified'); ?></dt>
+			<dd>
+				<?php echo $orderLine['User']['modified'];?>
+				&nbsp;
+			</dd>
+		</dl>
+	<?php endif; ?>
+	</div>
+	<div class="span3">
+		<ul class="nav nav-list">
+			<li><?php echo $this->Html->link(__('Edit %s', __('User')), array('controller' => 'users', 'action' => 'edit', $orderLine['User']['id'])); ?></li>
+		</ul>
 	</div>
 </div>
 
@@ -121,49 +178,6 @@
 </div>
 <div class="row-fluid">
 	<div class="span9">
-		<h3><?php echo __('Related %s', __('Users')); ?></h3>
-	<?php if (!empty($orderLine['User'])):?>
-		<table class="table table-striped">
-			<tr>
-				<th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Username'); ?></th>
-				<th><?php echo __('Email'); ?></th>
-				<th><?php echo __('Password'); ?></th>
-				<th><?php echo __('Authority'); ?></th>
-				<th><?php echo __('Created'); ?></th>
-				<th><?php echo __('Orider Line Id'); ?></th>
-				<th><?php echo __('Modified'); ?></th>
-				<th class="actions"><?php echo __('Actions');?></th>
-			</tr>
-		<?php foreach ($orderLine['User'] as $user): ?>
-			<tr>
-				<td><?php echo $user['id'];?></td>
-				<td><?php echo $user['username'];?></td>
-				<td><?php echo $user['email'];?></td>
-				<td><?php echo $user['password'];?></td>
-				<td><?php echo $user['authority'];?></td>
-				<td><?php echo $user['created'];?></td>
-				<td><?php echo $user['orider_line_id'];?></td>
-				<td><?php echo $user['modified'];?></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'users', 'action' => 'delete', $user['id']), null, __('Are you sure you want to delete # %s?', $user['id'])); ?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		</table>
-	<?php endif; ?>
-
-	</div>
-	<div class="span3">
-		<ul class="nav nav-list">
-			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
-</div>
-<div class="row-fluid">
-	<div class="span9">
 		<h3><?php echo __('Related %s', __('Illusts')); ?></h3>
 	<?php if (!empty($orderLine['Illust'])):?>
 		<table class="table table-striped">
@@ -190,6 +204,49 @@
 	<div class="span3">
 		<ul class="nav nav-list">
 			<li><?php echo $this->Html->link(__('New %s', __('Illust')), array('controller' => 'illusts', 'action' => 'add'));?> </li>
+		</ul>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span9">
+		<h3><?php echo __('Related %s', __('Projects')); ?></h3>
+	<?php if (!empty($orderLine['Project'])):?>
+		<table class="table table-striped">
+			<tr>
+				<th><?php echo __('Id'); ?></th>
+				<th><?php echo __('Project Status Id'); ?></th>
+				<th><?php echo __('Deadline'); ?></th>
+				<th><?php echo __('Order Line Id'); ?></th>
+				<th><?php echo __('Created'); ?></th>
+				<th><?php echo __('Modified'); ?></th>
+				<th><?php echo __('Title'); ?></th>
+				<th><?php echo __('Remark'); ?></th>
+				<th class="actions"><?php echo __('Actions');?></th>
+			</tr>
+		<?php foreach ($orderLine['Project'] as $project): ?>
+			<tr>
+				<td><?php echo $project['id'];?></td>
+				<td><?php echo $project['project_status_id'];?></td>
+				<td><?php echo $project['deadline'];?></td>
+				<td><?php echo $project['order_line_id'];?></td>
+				<td><?php echo $project['created'];?></td>
+				<td><?php echo $project['modified'];?></td>
+				<td><?php echo $project['title'];?></td>
+				<td><?php echo $project['remark'];?></td>
+				<td class="actions">
+					<?php echo $this->Html->link(__('View'), array('controller' => 'projects', 'action' => 'view', $project['id'])); ?>
+					<?php echo $this->Html->link(__('Edit'), array('controller' => 'projects', 'action' => 'edit', $project['id'])); ?>
+					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'projects', 'action' => 'delete', $project['id']), null, __('Are you sure you want to delete # %s?', $project['id'])); ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	<?php endif; ?>
+
+	</div>
+	<div class="span3">
+		<ul class="nav nav-list">
+			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>

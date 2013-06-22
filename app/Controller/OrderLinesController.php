@@ -80,7 +80,8 @@ class OrderLinesController extends AppController {
 			}
 		}
 		$projects = $this->OrderLine->Project->find('list');
-		$this->set(compact('projects'));
+		$orderStatuses = $this->OrderLine->OrderStatus->find('list');
+		$this->set(compact('projects', 'orderStatuses'));
 	}
 
 /**
@@ -119,7 +120,8 @@ class OrderLinesController extends AppController {
 			$this->request->data = $this->OrderLine->read(null, $id);
 		}
 		$projects = $this->OrderLine->Project->find('list');
-		$this->set(compact('projects'));
+		$orderStatuses = $this->OrderLine->OrderStatus->find('list');
+		$this->set(compact('projects', 'orderStatuses'));
 	}
 
 /**
