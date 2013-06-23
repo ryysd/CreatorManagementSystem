@@ -144,7 +144,9 @@ for ($i = 0; $i < $photo_num; $i++) {
          </li>
        </ul>
 <?php else: ?>
-     <p>承認された画像がありません。</p>
+<div class="hero-unit">
+  <p>承認された画像がありません。</p>
+</div>
 <?php endif; ?>
    </div>
 <?php
@@ -205,11 +207,15 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "      </fieldset>";
     echo "<hr>";
     echo        $this->BootstrapForm->end();
-
+    echo "	<h3>コメント</h3> ";
+    $attachment_comments = array_filter($comments, create_function('$x',
+        '$attachmentId = '."'$attachmentId';" .
+	'return $x[\'attachment_id\'] == $attachmentId;')
+    );
+    if (!empty($attachment_comments)) {
     echo "      <table class=\"table table-striped\">";
     echo "        <tr><th nowrap>ユーザー</th><th>コメント</th><th>発言日</th></tr>";
-                  foreach ($comments as $comment) {
-		      if ($comment['attachment_id'] == $attachmentId) {
+                  foreach ($attachment_comments as $comment) {
     echo "          <tr>";
                     $name = $userNames[$comment['user_id']];
 		    $content = $comment['content'];
@@ -219,7 +225,7 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "          <td nowrap>$created</td>";
     echo "          </tr>";
 		      }
-                  }
+    }
     echo "      </table>";
     echo "      <div>";
     echo               $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal', 'align' => 'center'));

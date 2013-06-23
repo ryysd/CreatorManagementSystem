@@ -14,11 +14,7 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('order_status_id', array(
-				        'label' => '状態',
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
+				echo $this->BootstrapForm->hidden('order_status_id', array('value' => 1));
 				echo $this->BootstrapForm->input('deadline', array(
 				        'label' => '締め切り',
 					'required' => 'required',
