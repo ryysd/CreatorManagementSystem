@@ -76,9 +76,18 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
 <?php
 $orderLineId = $orderLine['OrderLine']['id'];
 $photo_num = count($orderLine['Attachment']);
-for ($i = 0; $i < $photo_num; $i++) { echo <<< _EOT_
-	<li><a href="#tab$i" data-toggle="tab">Image-$i</a></li>
-_EOT_;
+for ($i = 0; $i < $photo_num; $i++) {
+    $attachment = $attachments[$i];
+    $attachmentId = $attachment['Attachment']['id'];
+    $is_accepted = $attachment['Attachment']['is_accepted'];
+    $accepted_status_id = $attachment['Attachment']['accepted_status_id'];
+    if (!isset($accepted_status_id)) {
+	echo "<li><a href=\"#tab$i\" data-toggle=\"tab\">Image-$i</a></li>";
+    }
+    else {
+        $accepted_status = $orderStatuses[$accepted_status_id];
+	echo "<li><a href=\"#tab$i\" data-toggle=\"tab\">Image-$i ($accepted_status)</a></li>";
+    }
 }
 ?>
  </ul>
@@ -88,7 +97,8 @@ _EOT_;
 <?php 
       $main_attachment_id = $orderLine['OrderLine']['main_attachment_id'];
       $main_attachment = null; 
-      $status = $orderStatuses[$orderLine['OrderLine']['order_status_id']];
+      $order_status_id = $orderLine['OrderLine']['order_status_id'];
+      $status = $orderStatuses[$order_status_id];
       foreach ($attachments as $attachment) {
 	  if ($attachment['Attachment']['id'] == $main_attachment_id) {
 	      $main_attachment = $attachment;
@@ -109,13 +119,28 @@ _EOT_;
            <table class="table table-striped">
              <tr>
                <td>状態</td>
-               <?php echo "<td>$status</td>"; ?>
+                 <?php echo "<td>$status</td>"; ?>
              </tr>
 	     <tr> 
                <td>更新日時</td>
                <?php echo "<td>$modified</td>"; ?>
              </tr>
            </table>
+<?php if($order_status_id > 1): ?>
+    <div class="row-fluid">
+<?php 
+      $pre = $orderLineLogs[0];
+      $pre_order_status_id = $pre['OrderLineLog']['order_status_id'];
+      $pre_order_status = $orderStatuses[$pre_order_status_id];
+?>
+<?php echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine', 'action' => 'rollback_order_status'."/".$orderLineId, 'class' => 'form-horizontal', 'align' => 'center')); ?>
+    		<fieldset>
+<?php echo $this->BootstrapForm->hidden('main_attachment_id', array('value'=>$main_attachment_id)); ?>
+<?php echo $this->BootstrapForm->submit('承認を取り消す。('.$status.' -> '.$pre_order_status.')', array('div' => false, 'class' => 'btn btn-danger')); ?>
+    		</fieldset>
+<?php echo $this->BootstrapForm->end(); ?>
+<?php endif; ?>
+    </div>
          </li>
        </ul>
 <?php else: ?>
@@ -127,6 +152,8 @@ _EOT_;
 for ($i = 0; $i < $photo_num; $i++) { 
     $attachment = $attachments[$i];
     $attachmentId = $attachment['Attachment']['id'];
+    $is_accepted = $attachment['Attachment']['is_accepted'];
+    $accepted_status_id = $attachment['Attachment']['accepted_status_id'];
     $dir = $this->webroot.APP_DIR."/".WEBROOT_DIR."/files/attachment/photo/".$attachment['Attachment']['dir'];
     $org_image = $dir."/".$attachment['Attachment']['photo'];
     $thumb_image = $dir."/thumb560_".$attachment['Attachment']['photo'];
@@ -147,9 +174,16 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "    <fieldset>";
     echo "      <table class=\"table table-striped\">";
     echo "        <td>";
-    echo            $this->BootstrapForm->input('order_status_id', array('options' => $orderStatuses, 'div' => false, 'label' => false));
+    if (!isset($accepted_status_id)) {
+    echo            $this->BootstrapForm->input('order_status_id', array('options' => $validOrderStatuses, 'div' => false, 'label' => false));
     echo            $this->BootstrapForm->hidden('main_attachment_id', array('value'=>$attachmentId));
-    echo            $this->BootstrapForm->submit(__('左記の状態でイラストを承認'), array('div' => false));
+    echo            $this->BootstrapForm->submit(__('左記の状態でイラストを承認'), array('class' => 'btn btn-success', 'div' => false));
+    }
+    else {
+    $accepted_status = $orderStatuses[$accepted_status_id];
+    echo            "<div class=\"btn btn-success disabled\">承認済み($accepted_status)</div>";
+    echo            "<span class=\"help-inline\">承認の取り消しはMainタブから行う事ができます。</span>";
+    }
     echo "        </td>";
     echo "      </table>";
     echo "      </fieldset>";
@@ -158,13 +192,12 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "    <fieldset>";
     echo "      <table class=\"table table-striped\">";
     echo "        <td>";
-    if (!isset($main_attachment_id) || $attachmentId != $main_attachment_id) {
+    if (!isset($accepted_status_id)) {
     echo            $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
     echo            $this->BootstrapForm->submit(__('イラストを削除'), array('div' => false, 'class' => 'btn btn-danger'));
     }
     else {
-    echo            $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
-    echo            "<div class=\"btn disabled\">イラストを削除</div>";
+    echo            "<div class=\"btn btn-danger disabled\">イラストを削除</div>";
     echo            "<span class=\"help-inline\">承認済みのイラストは削除できません。</span>";
     }
     echo "        </td>";

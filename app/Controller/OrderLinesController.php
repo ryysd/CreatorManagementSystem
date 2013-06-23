@@ -58,7 +58,17 @@ class OrderLinesController extends AppController {
 		$this->set('orderLine', $this->OrderLine->read(null, $id));
 		$this->set('attachments', $this->OrderLine->Attachment->find('all', array('conditions' => array('Attachment.foreign_key' => $id))));
 		$this->set('orderStatuses', $this->OrderLine->OrderStatus->find('list'));
+		$this->set('validOrderStatuses', $this->OrderLine->OrderStatus->find('list', 
+		    array('conditions' => array('OrderStatus.id >' => $this->OrderLine->findById($id)['OrderLine']['order_status_id']) 
+		)));
 		$this->set('userNames', $this->OrderLine->User->find('list', array('fields' => array('User.id', 'User.name'))));
+	        $logs = $this->OrderLine->OrderLineLog->find('all', 
+	            array(
+	                'order' => array('OrderStatus.id DESC'),
+	                'conditions' => array('OrderLine.id' => $id)
+	            )
+	        );
+		$this->set('orderLineLogs', $logs);
 	}
 
 /**
@@ -70,17 +80,18 @@ class OrderLinesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->OrderLine->create();
 			if ($this->OrderLine->save($this->request->data)) {
-				$this->Session->setFlash(
-					__('The %s has been saved', __('order line')),
-					'alert',
-					array(
-						'plugin' => 'TwitterBootstrap',
-						'class' => 'alert-success'
-					)
-				);
-				if ($project_id != null) {
-				    $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
-				}
+			    print_r($this->request->data);
+				    $this->Session->setFlash(
+				    	__('The %s has been saved', __('order line')),
+				    	'alert',
+				    	array(
+				    		'plugin' => 'TwitterBootstrap',
+				    		'class' => 'alert-success'
+				    	)
+				    );
+				    if ($project_id != null) {
+				        $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
+				    }
 				else {
 				    $this->redirect(array('controller' => 'projects', 'action' => 'index'));
 				}
@@ -189,7 +200,6 @@ class OrderLinesController extends AppController {
 		throw new NotFoundException(__('Invalid %s', __('order line')));
 	    }
 	    $orderLine = $this->OrderLine->read(null, $id);
-
 	    if($this->request->data){
 		// $obj['Attachment'] = $this->request->data['Attachment'];
 		$this->request->data['OrderLine'] = $orderLine['OrderLine'];
@@ -223,10 +233,26 @@ class OrderLinesController extends AppController {
 		throw new NotFoundException(__('Invalid %s', __('order line')));
 	    }
 	    $orderLine = $this->OrderLine->read(null, $id);
+	    $attachment = $this->OrderLine->Attachment->findById($this->request->data['OrderLine']['main_attachment_id']);
+	    $orderLineLog = array(
+		'order_line_id' => $id,
+		'attachment_id' => $orderLine['OrderLine']['main_attachment_id'],
+		'order_status_id' => $orderLine['OrderLine']['order_status_id']
+	    );
 
 	    if($this->request->data){
-		if($this->OrderLine->saveField('order_status_id' ,$this->request->data['OrderLine']['order_status_id']) &&
-		$this->OrderLine->saveField('main_attachment_id' ,$this->request->data['OrderLine']['main_attachment_id'])){
+		$attachment['Attachment']['is_accepted'] = true;
+		$attachment['Attachment']['accepted_status_id'] = $this->request->data['OrderLine']['order_status_id'];
+		$pre_main_id = $orderLine['OrderLine']['main_attachment_id'];
+		$pre_order_id = $orderLine['OrderLine']['order_status_id'];
+
+		if( $this->OrderLine->Attachment->saveAll($attachment) &&
+		    $this->OrderLine->saveField('order_status_id', $this->request->data['OrderLine']['order_status_id']) &&
+                    $this->OrderLine->saveField('pre_main_attachment_id', $pre_main_id) &&
+                    $this->OrderLine->saveField('pre_order_status_id', $pre_order_id) &&
+		    $this->OrderLine->saveField('main_attachment_id', $this->request->data['OrderLine']['main_attachment_id']) &&
+		    $this->OrderLine->OrderLineLog->saveAll($orderLineLog)
+		){
 		    $this->Session->setFlash(
 			__('The status has been updated.'),
 			'alert',
@@ -281,5 +307,54 @@ class OrderLinesController extends AppController {
 		    );
 		}
 		$this->redirect(array('action' => 'view', $id));
+	}
+
+	public function rollback_order_status($id = null) {
+	    $this->OrderLine->id = $id;
+	    if (!$this->OrderLine->exists()) {
+		throw new NotFoundException(__('Invalid %s', __('order line')));
+	    }
+	    $orderLine = $this->OrderLine->read(null, $id);
+	    $attachment = $this->OrderLine->Attachment->findById($this->request->data['OrderLine']['main_attachment_id']);
+	    $orderLine['OrderLine']['order_status_id'] = $orderLine['OrderLine']['order_status_id'] - 1;
+
+	    $logs = $this->OrderLine->OrderLineLog->find('all', 
+		array(
+		    'order' => array('OrderStatus.id DESC'),
+		    'conditions' => array('OrderLine.id' => $id)
+		)
+	    );
+
+	    $pre = $logs[0];
+
+	    if($this->request->data){
+		$attachment['Attachment']['is_accepted'] = false;
+		$attachment['Attachment']['accepted_status_id'] = null;
+
+		if( $this->OrderLine->OrderLineLog->delete($pre['OrderLineLog']['id']) &&
+		    $this->OrderLine->Attachment->saveAll($attachment['Attachment']) &&
+		    $this->OrderLine->saveField('order_status_id', $pre['OrderLineLog']['order_status_id']) &&
+		    $this->OrderLine->saveField('main_attachment_id', $pre['OrderLineLog']['attachment_id'])){
+		    $this->Session->setFlash(
+			__('The status has been updated.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-success'
+			)
+		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
+		} else {
+		    $this->Session->setFlash(
+			__('The status could not be updated. Please, try again.'),
+			'alert',
+			array(
+			    'plugin' => 'TwitterBootstrap',
+			    'class' => 'alert-error'
+			)
+		    );
+		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
+		}
+	    }
 	}
 }
