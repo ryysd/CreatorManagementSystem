@@ -1,4 +1,16 @@
 <div class="row-fluid">
+<div class="hero-unit">
+  <h1>Creator Management System</h1>
+  <p>for Freedom Speech</p>
+  <p>
+    <a class="btn btn-primary btn-large">
+      Learn more
+    </a>
+  </p>
+</div>
+</div>
+
+<div class="row-fluid">
 	<div class="span9">
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User', Array('url' => '/admin/login')); ?>

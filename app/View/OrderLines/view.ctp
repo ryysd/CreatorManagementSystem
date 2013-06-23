@@ -145,7 +145,7 @@ for ($i = 0; $i < $photo_num; $i++) {
        </ul>
 <?php else: ?>
 <div class="hero-unit">
-  <p>承認された画像がありません。</p>
+  <p>承認されたイラストがありません。</p>
 </div>
 <?php endif; ?>
    </div>

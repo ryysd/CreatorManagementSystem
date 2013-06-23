@@ -3,3 +3,4 @@
 /app/webroot/files/attachment/*
 .DS_Store
 .project
+*.swp
