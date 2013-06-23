@@ -225,7 +225,8 @@ class OrderLinesController extends AppController {
 	    $orderLine = $this->OrderLine->read(null, $id);
 
 	    if($this->request->data){
-		if($this->OrderLine->saveField('order_status_id' ,$this->request->data['OrderLine']['order_status_id'])){
+		if($this->OrderLine->saveField('order_status_id' ,$this->request->data['OrderLine']['order_status_id']) &&
+		$this->OrderLine->saveField('main_attachment_id' ,$this->request->data['OrderLine']['main_attachment_id'])){
 		    $this->Session->setFlash(
 			__('The status has been updated.'),
 			'alert',
@@ -247,5 +248,38 @@ class OrderLinesController extends AppController {
 		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		}
 	    }
+	}
+	
+	public function delete_attachment($id = null) {
+		if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this->OrderLine->id = $id;
+		if (!$this->OrderLine->exists()) {
+			throw new NotFoundException(__('Invalid %s', __('order line')));
+		}
+
+		if($this->request->data) {
+		    if ($this->OrderLine->Attachment->delete($this->request->data['OrderLine']['attachment_id'])) {
+		    	$this->Session->setFlash(
+		    		__('The %s deleted', __('image')),
+		    		'alert',
+		    		array(
+		    			'plugin' => 'TwitterBootstrap',
+		    			'class' => 'alert-success'
+		    		)
+		    	);
+		        $this->redirect(array('action' => 'view', $id));
+		    }
+		    $this->Session->setFlash(
+		    	__('The %s was not deleted', __('image')),
+		    	'alert',
+		    	array(
+		    		'plugin' => 'TwitterBootstrap',
+		    		'class' => 'alert-error'
+		    	)
+		    );
+		}
+		$this->redirect(array('action' => 'view', $id));
 	}
 }

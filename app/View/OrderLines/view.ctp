@@ -77,13 +77,50 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
 $orderLineId = $orderLine['OrderLine']['id'];
 $photo_num = count($orderLine['Attachment']);
 for ($i = 0; $i < $photo_num; $i++) { echo <<< _EOT_
-	<li><a href="#tab$i" data-toggle="tab">Sub-$i</a></li>
+	<li><a href="#tab$i" data-toggle="tab">Image-$i</a></li>
 _EOT_;
 }
 ?>
  </ul>
    <div id="photo-tab-content" class="tab-content">
     <div class="tab-pane active" id="home">
+<?php if (isset($orderLine['OrderLine']['main_attachment_id'])): ?>
+<?php 
+      $main_attachment_id = $orderLine['OrderLine']['main_attachment_id'];
+      $main_attachment = null; 
+      $status = $orderStatuses[$orderLine['OrderLine']['order_status_id']];
+      foreach ($attachments as $attachment) {
+	  if ($attachment['Attachment']['id'] == $main_attachment_id) {
+	      $main_attachment = $attachment;
+	      break;
+	  }
+      }
+      $modified = $main_attachment['Attachment']['modified'];
+      $dir = $this->webroot.APP_DIR."/".WEBROOT_DIR."/files/attachment/photo/".$main_attachment['Attachment']['dir'];
+      $main_image = $dir."/".$main_attachment['Attachment']['photo'];
+?>
+       <ul class="thumbnails">
+         <li class="span6">
+	   <?php echo "<a href=\"$main_image\" class=\"thumbnail\">" ?>
+	     <?php echo "<img data-src=\"holder.js/560x420\" src=\"$main_image\" alt=\"\">" ?>
+           </a>
+         </li>
+         <li class="span6">
+           <table class="table table-striped">
+             <tr>
+               <td>状態</td>
+               <?php echo "<td>$status</td>"; ?>
+             </tr>
+	     <tr> 
+               <td>更新日時</td>
+               <?php echo "<td>$modified</td>"; ?>
+             </tr>
+           </table>
+         </li>
+       </ul>
+<?php else: ?>
+     <p>承認された画像がありません。</p>
+<?php endif; ?>
    </div>
 <?php
 // tab contents
@@ -110,11 +147,30 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "    <fieldset>";
     echo "      <table class=\"table table-striped\">";
     echo "        <td>";
-    echo            $this->BootstrapForm->input('order_status_id', array('options' => $orderStatuses, 'div' => false, 'label' => '状態'));
+    echo            $this->BootstrapForm->input('order_status_id', array('options' => $orderStatuses, 'div' => false, 'label' => false));
+    echo            $this->BootstrapForm->hidden('main_attachment_id', array('value'=>$attachmentId));
     echo            $this->BootstrapForm->submit(__('左記の状態でイラストを承認'), array('div' => false));
     echo "        </td>";
     echo "      </table>";
     echo "      </fieldset>";
+    echo        $this->BootstrapForm->end();
+    echo      $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine', 'action' => 'delete_attachment'."/".$orderLineId, 'class' => 'form-horizontal'));
+    echo "    <fieldset>";
+    echo "      <table class=\"table table-striped\">";
+    echo "        <td>";
+    if (!isset($main_attachment_id) || $attachmentId != $main_attachment_id) {
+    echo            $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
+    echo            $this->BootstrapForm->submit(__('イラストを削除'), array('div' => false, 'class' => 'btn btn-danger'));
+    }
+    else {
+    echo            $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
+    echo            "<div class=\"btn disabled\">イラストを削除</div>";
+    echo            "<span class=\"help-inline\">承認済みのイラストは削除できません。</span>";
+    }
+    echo "        </td>";
+    echo "      </table>";
+    echo "      </fieldset>";
+    echo "<hr>";
     echo        $this->BootstrapForm->end();
 
     echo "      <table class=\"table table-striped\">";
@@ -135,7 +191,7 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "      <div>";
     echo               $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal', 'align' => 'center'));
     echo "			<fieldset>";
-    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required'));
+    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge'));
     echo				$this->BootstrapForm->submit(__('コメントを送信'), array('div' => false));
     echo "			</fieldset>";
     echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id']));
@@ -197,7 +253,7 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "      <div class='row-fluid'>";
     echo               $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal'));
     echo "			<fieldset>";
-    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required'));
+    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge'));
     echo				$this->BootstrapForm->submit(__('コメントを送信'), array('div' => false));
     echo "			</fieldset>";
     echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id']));
