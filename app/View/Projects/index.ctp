@@ -1,6 +1,6 @@
 <div class="row-fluid">
 	<div class="span9">
-		<h2><?php echo __('List %s', __('Projects'));?></h2>
+		<h2><?php echo __('プロジェクト一覧');?></h2>
 
 		<p>
 			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
@@ -8,11 +8,11 @@
 
 		<table class="table table-striped">
 			<tr>
-				<th><?php echo $this->BootstrapPaginator->sort('title');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('project_status_id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('deadline');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('remark');?></th>
-				<th class="actions"><?php echo __('Actions');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('title', 'プロジェクト名');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('project_status_id', '状態');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('deadline', '締め切り');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
+				<th class="actions"><?php echo __('操作');?></th>
 			</tr>
 		<?php foreach ($projects as $project): ?>
 			<tr>
@@ -25,9 +25,8 @@
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), null, __('Are you sure you want to delete # %s?', $project['Project']['id'])); ?>
+					<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $project['Project']['id'])); ?>
+					<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $project['Project']['id']), null, __('Are you sure you want to delete # %s?', $project['Project']['id'])); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>
@@ -39,7 +38,7 @@
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link('新規プロジェクト作成', array('action' => 'add')); ?></li>
 		</ul>
 		</div>
 	</div>

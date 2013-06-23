@@ -46,7 +46,7 @@ class User extends AppModel {
 	    'role' => Array(
 		'valid' => Array(
 		    'rule' => Array('inList', Array('admin', 'staff', 'author')),
-		    'message' => '$B8"8B$rA*Br$7$F$/$@$5$$!#(B',
+		    'message' => '権限を選択してください。',
 		    'allowEmpty' => false
 		)
 	    )

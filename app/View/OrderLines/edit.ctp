@@ -2,50 +2,34 @@
 	<div class="span9">
 		<?php echo $this->BootstrapForm->create('OrderLine', array('class' => 'form-horizontal'));?>
 			<fieldset>
-				<legend><?php echo __('Edit %s', __('Order Line')); ?></legend>
+				<legend><?php echo __('発注イラストの編集'); ?></legend>
 				<?php
 				echo $this->BootstrapForm->input('project_id', array(
+				        'label' => '所属プロジェクト',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('title', array(
+				        'label' => 'タイトル',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('order_status_id', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
-				echo $this->BootstrapForm->input('commnet_modified', array(
+				        'label' => '状態',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('deadline', array(
+				        'label' => '締め切り',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->hidden('id');
-				echo $this->BootstrapForm->input('User');
+				echo $this->BootstrapForm->input('User', array(
+				        'label' => '担当イラストレーター'
+				));
 				?>
-				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
+				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>
 			</fieldset>
 		<?php echo $this->BootstrapForm->end();?>
-	</div>
-	<div class="span3">
-		<div class="well" style="padding: 8px 0; margin-top:8px;">
-		<ul class="nav nav-list">
-			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('OrderLine.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('OrderLine.id'))); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('action' => 'index'));?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Projects')), array('controller' => 'projects', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Project')), array('controller' => 'projects', 'action' => 'add')); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Order Statuses')), array('controller' => 'order_statuses', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Order Status')), array('controller' => 'order_statuses', 'action' => 'add')); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Comments')), array('controller' => 'comments', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?></li>
-			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?></li>
-		</ul>
-		</div>
 	</div>
 </div>

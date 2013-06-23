@@ -21,9 +21,9 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
 	<div class="span9">
           <table class="table table-striped">
                 <tr>
-                <th>Project</th>
-                <th>Status</th>
-                <th>DeadLine</th>
+                <th>所属プロジェクト</th>
+                <th>状態</th>
+                <th>締め切り</th>
                 </tr>
 		<h2><?php echo h($orderLine['OrderLine']['title']); ?></h2>
 			<td>
@@ -43,11 +43,11 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
 </div>
 <div class="row-fluid">
 	<div class="span9">
-		<h4><?php echo __('Assigned %s', __('Illustrators')); ?></h4>
+		<h4><?php echo __('担当イラストレーター'); ?></h4>
 	<?php if (!empty($orderLine['User'])):?>
 		<table class="table table-striped">
 			<tr>
-				<th><?php echo __('Name'); ?></th>
+				<th><?php echo __('名前'); ?></th>
 				<th><?php echo __('Email'); ?></th>
 			</tr>
 		<?php foreach ($orderLine['User'] as $user): ?>
@@ -58,7 +58,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
 		<?php endforeach; ?>
 		</table>
         <?php else: ?>
-        <?php echo "No one has been assigned."; ?>
+        <?php echo "担当イラストレーターがいません。"; ?>
 	<?php endif; ?>
 
 	</div>
@@ -70,6 +70,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
  <ul class="nav nav-tabs">
   <li class="active"><a href="#home" data-toggle="tab">Main</a></li>
 <?php
+$orderLineId = $orderLine['OrderLine']['id'];
 $photo_num = count($orderLine['Attachment']);
 for ($i = 0; $i < $photo_num; $i++) { echo <<< _EOT_
 	<li><a href="#tab$i" data-toggle="tab">Sub-$i</a></li>
@@ -90,7 +91,6 @@ for ($i = 0; $i < $photo_num; $i++) {
     $thumb_image = $dir."/thumb560_".$attachment['Attachment']['photo'];
     $comments = $orderLine['Comment'];
     $comment_num = count($comments);
-    $orderLineId = $orderLine['OrderLine']['id'];
 
     echo "<div class=\"tab-pane\" id=\"tab$i\">";
     echo "  <ul class=\"thumbnails\">";
@@ -106,24 +106,24 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "    <fieldset>";
     echo "      <table class=\"table table-striped\">";
     echo "        <td>";
-    echo            $this->BootstrapForm->input('order_status_id', array('options' => $orderStatuses, 'div' => false));
-    echo            $this->BootstrapForm->submit(__('Update'), array('div' => false));
+    echo            $this->BootstrapForm->input('order_status_id', array('options' => $orderStatuses, 'div' => false, 'label' => '状態'));
+    echo            $this->BootstrapForm->submit(__('左記の状態でイラストを承認'), array('div' => false));
     echo "        </td>";
     echo "      </table>";
     echo "      </fieldset>";
     echo        $this->BootstrapForm->end();
 
     echo "      <table class=\"table table-striped\">";
-    echo "        <tr><th>User</th><th>Comment</th><th>Date</th></tr>";
+    echo "        <tr><th nowrap>ユーザー</th><th>コメント</th><th>発言日</th></tr>";
                   foreach ($comments as $comment) {
 		      if ($comment['attachment_id'] == $attachmentId) {
     echo "          <tr>";
                     $name = $userNames[$comment['user_id']];
 		    $content = $comment['content'];
 		    $created = $comment['created'];
-    echo "          <td>$name</td>";
+    echo "          <td nowrap>$name</td>";
     echo "          <td>$content</td>";
-    echo "          <td>$created</td>";
+    echo "          <td nowrap>$created</td>";
     echo "          </tr>";
 		      }
                   }
@@ -131,8 +131,8 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "      <div>";
     echo               $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal', 'align' => 'center'));
     echo "			<fieldset>";
-    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false));
-    echo				$this->BootstrapForm->submit(__('Submit Comment'), array('div' => false));
+    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required'));
+    echo				$this->BootstrapForm->submit(__('コメントを送信'), array('div' => false));
     echo "			</fieldset>";
     echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id']));
     echo                $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
@@ -155,9 +155,9 @@ for ($i = 0; $i < $photo_num; $i++) {
     <td>
       <?php
       echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine','action' => 'upload'."/".$orderLine['OrderLine']['id'], 'type' => 'file', ));
-      echo $this->BootstrapForm->input('Attachment.0.photo', array('type' => 'file', 'label' => false, 'div' => false));
+      echo $this->BootstrapForm->input('Attachment.0.photo', array('type' => 'file', 'label' => false, 'div' => false, 'required' => 'required'));
       echo $this->BootstrapForm->hidden('Attachment.0.model', array('value'=>'OrderLine'));
-      echo $this->BootstrapForm->submit(__('Upload'), array('div' => false));
+      echo $this->BootstrapForm->submit(__('アップロード'), array('div' => false));
       echo $this->BootstrapForm->end();
       ?>
     </td>
@@ -167,20 +167,20 @@ for ($i = 0; $i < $photo_num; $i++) {
 <hr>
 <div class="row-fluid">
 	<div class="span9">
-		<h3><?php echo __('%s', __('Comments')); ?></h3>
+		<h3><?php echo __('%s', __('コメント')); ?></h3>
 	<?php if (!empty($orderLine['Comment'])):?>
 		<table class="table table-striped">
 			<tr>
-				<th><?php echo __('User'); ?></th>
-				<th><?php echo __('Content'); ?></th>
-				<th><?php echo __('Created'); ?></th>
+				<th nowrap><?php echo __('ユーザー'); ?></th>
+				<th><?php echo __('コメント'); ?></th>
+				<th><?php echo __('発言日'); ?></th>
 			</tr>
 		<?php foreach ($orderLine['Comment'] as $comment): ?>
                 <?php if (!isset($comment['attachment_id'])) :?>
 			<tr>
-				<td><?php echo $userNames[$comment['user_id']];?></td>
+				<td nowrap><?php echo $userNames[$comment['user_id']];?></td>
 				<td><?php echo $comment['content'];?></td>
-				<td><?php echo $comment['created'];?></td>
+				<td nowrap><?php echo $comment['created'];?></td>
 			</tr>
                 <?php endif; ?>
 		<?php endforeach; ?>
@@ -193,8 +193,8 @@ for ($i = 0; $i < $photo_num; $i++) {
     echo "      <div class='row-fluid'>";
     echo               $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal'));
     echo "			<fieldset>";
-    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false));
-    echo				$this->BootstrapForm->submit(__('Submit Comment'), array('div' => false));
+    echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required'));
+    echo				$this->BootstrapForm->submit(__('コメントを送信'), array('div' => false));
     echo "			</fieldset>";
     echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id']));
     echo                $this->BootstrapForm->hidden('order_line_id', array('value'=>$orderLineId));

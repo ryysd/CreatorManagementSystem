@@ -2,12 +2,7 @@
 	<div class="span9">
 		<h2><?php echo h($user['User']['name']); ?></h2>
 		<dl>
-			<dt><?php echo __('Id'); ?></dt>
-			<dd>
-				<?php echo h($user['User']['id']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Name'); ?></dt>
+			<dt><?php echo __('名前'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['name']); ?>
 				&nbsp;
@@ -22,17 +17,17 @@
 				<?php echo h($user['User']['password']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Role'); ?></dt>
+			<dt><?php echo __('属性'); ?></dt>
 			<dd>
 				<?php echo h($user['Role']['name']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Created'); ?></dt>
+			<dt><?php echo __('作成日'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['created']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Modified'); ?></dt>
+			<dt><?php echo __('変更日'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['modified']); ?>
 				&nbsp;
@@ -43,10 +38,8 @@
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Html->link(__('Edit %s', __('User')), array('action' => 'edit', $user['User']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink(__('Delete %s', __('User')), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('User')), array('action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('ユーザー情報の変更'), array('action' => 'edit', $user['User']['id'])); ?> </li>
+			<li><?php echo $this->Form->postLink(__('ユーザーの削除'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
 		</ul>
 		</div>
 	</div>
