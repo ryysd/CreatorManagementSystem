@@ -56,6 +56,7 @@ class ProjectsController extends AppController {
 			throw new NotFoundException(__('Invalid %s', __('project')));
 		}
 		$this->set('project', $this->Project->read(null, $id));
+		$this->set('orderStatuses', $this->Project->OrderLine->OrderStatus->find('list'));
 	}
 
 /**

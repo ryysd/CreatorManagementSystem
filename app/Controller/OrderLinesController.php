@@ -56,7 +56,9 @@ class OrderLinesController extends AppController {
 			throw new NotFoundException(__('Invalid %s', __('order line')));
 		}
 		$this->set('orderLine', $this->OrderLine->read(null, $id));
+		$this->set('attachments', $this->OrderLine->Attachment->find('all', array('conditions' => array('Attachment.foreign_key' => $id))));
 		$this->set('orderStatuses', $this->OrderLine->OrderStatus->find('list'));
+		$this->set('userNames', $this->OrderLine->User->find('list', array('fields' => array('User.id', 'User.name'))));
 	}
 
 /**

@@ -67,7 +67,7 @@ class CommentsController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller' => 'OrderLines', 'action' => 'view', $this->request->data['Comment']['order_line_id']));
 			} else {
 				$this->Session->setFlash(
 					__('The %s could not be saved. Please, try again.', __('comment')),
@@ -77,10 +77,13 @@ class CommentsController extends AppController {
 						'class' => 'alert-error'
 					)
 				);
+				$this->redirect(array('controller' => 'OrderLines', 'action' => 'view', $this->request->data['Comment']['order_line_id']));
 			}
 		}
+		$users = $this->Comment->User->find('list');
 		$orderLines = $this->Comment->OrderLine->find('list');
-		$this->set(compact('orderLines'));
+		$attachments = $this->Comment->Attachment->find('list');
+		$this->set(compact('users', 'orderLines', 'attachments'));
 	}
 
 /**
@@ -118,8 +121,10 @@ class CommentsController extends AppController {
 		} else {
 			$this->request->data = $this->Comment->read(null, $id);
 		}
+		$users = $this->Comment->User->find('list');
 		$orderLines = $this->Comment->OrderLine->find('list');
-		$this->set(compact('orderLines'));
+		$attachments = $this->Comment->Attachment->find('list');
+		$this->set(compact('users', 'orderLines', 'attachments'));
 	}
 
 /**

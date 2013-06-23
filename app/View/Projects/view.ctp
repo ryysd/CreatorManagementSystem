@@ -1,23 +1,25 @@
 <div class="row-fluid">
 	<div class="span9">
+          <table class="table table-striped">
 		<h2><?php  echo h($project['Project']['title']);?></h2>
-		<dl>
-			<dt><?php echo __('Project Status'); ?></dt>
-			<dd>
+                        <tr>
+                          <th>Status</th>
+                          <th>deadline</th>
+                        </tr>
+			<td>
 				<?php echo h($project['ProjectStatus']['name']); ?>
 				&nbsp;
-			</dd>
-			<dt><?php echo __('Deadline'); ?></dt>
-			<dd>
+			</td>
+			<td>
 				<?php echo h($project['Project']['deadline']); ?>
 				&nbsp;
-			</dd>
-			<dt><?php echo __('Remark'); ?></dt>
+			</td>
+          </table>
+                        <dt>Remark</dt>
 			<dd>
 				<?php echo h($project['Project']['remark']); ?>
 				&nbsp;
 			</dd>
-		</dl>
 	</div>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
@@ -30,7 +32,7 @@
 		</div>
 	</div>
 </div>
-
+<hr>
 <div class="row-fluid">
 	<div class="span9">
 		<h3><?php echo __('Related %s', __('Order Lines')); ?></h3>
@@ -38,16 +40,15 @@
 		<table class="table table-striped">
 			<tr>
 				<th><?php echo __('Title'); ?></th>
-				<th><?php echo __('Project Id'); ?></th>
-				<th><?php echo __('Order Status Id'); ?></th>
+				<th><?php echo __('Status'); ?></th>
 				<th><?php echo __('Deadline'); ?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
 		<?php foreach ($project['OrderLine'] as $orderLine): ?>
 			<tr>
-				<td><?php echo $orderLine['title'];?></td>
-				<td><?php echo $orderLine['project_id'];?></td>
-				<td><?php echo $orderLine['order_status_id'];?></td>
+				<td class="actions">
+					<?php echo $this->Html->link($orderLine['title'], array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>
+				<td><?php echo $orderStatuses[$orderLine['order_status_id']];?></td>
 				<td><?php echo $orderLine['deadline'];?></td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>

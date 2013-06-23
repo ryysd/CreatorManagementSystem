@@ -14,17 +14,23 @@
 				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('order_line_id');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('attachment_id');?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
 		<?php foreach ($comments as $comment): ?>
 			<tr>
 				<td><?php echo h($comment['Comment']['id']); ?>&nbsp;</td>
-				<td><?php echo h($comment['Comment']['user_id']); ?>&nbsp;</td>
+				<td>
+					<?php echo $this->Html->link($comment['User']['name'], array('controller' => 'users', 'action' => 'view', $comment['User']['id'])); ?>
+				</td>
 				<td><?php echo h($comment['Comment']['content']); ?>&nbsp;</td>
 				<td><?php echo h($comment['Comment']['created']); ?>&nbsp;</td>
 				<td><?php echo h($comment['Comment']['modified']); ?>&nbsp;</td>
 				<td>
 					<?php echo $this->Html->link($comment['OrderLine']['title'], array('controller' => 'order_lines', 'action' => 'view', $comment['OrderLine']['id'])); ?>
+				</td>
+				<td>
+					<?php echo $this->Html->link($comment['Attachment']['name'], array('controller' => 'attachments', 'action' => 'view', $comment['Attachment']['id'])); ?>
 				</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $comment['Comment']['id'])); ?>
@@ -42,8 +48,12 @@
 		<ul class="nav nav-list">
 			<li class="nav-header"><?php echo __('Actions'); ?></li>
 			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Users')), array('controller' => 'users', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('User')), array('controller' => 'users', 'action' => 'add')); ?> </li>
 			<li><?php echo $this->Html->link(__('List %s', __('Order Lines')), array('controller' => 'order_lines', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('New %s', __('Order Line')), array('controller' => 'order_lines', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('List %s', __('Attachments')), array('controller' => 'attachments', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('New %s', __('Attachment')), array('controller' => 'attachments', 'action' => 'add')); ?> </li>
 		</ul>
 		</div>
 	</div>

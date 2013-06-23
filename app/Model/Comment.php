@@ -16,9 +16,23 @@ class Comment extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'OrderLine' => array(
 			'className' => 'OrderLine',
 			'foreignKey' => 'order_line_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Attachment' => array(
+			'className' => 'Attachment',
+			'foreignKey' => 'attachment_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
