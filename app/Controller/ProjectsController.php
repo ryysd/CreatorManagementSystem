@@ -34,6 +34,14 @@ class ProjectsController extends AppController {
 		'authenticate' => Array('Form' => Array('fields' => Array('username' => 'email')))
 	    )
 	);
+
+	function beforeFilter() {
+	    parent::beforeFilter();
+
+	    if (isIllustratorUser($this->Auth->user())) {
+		$this->redirect(array('controller' => 'users', 'action' => 'view/'.$this->Auth->user()['id']));
+	    }
+	}
 /**
  * index method
  *

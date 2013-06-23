@@ -12,7 +12,9 @@
 				<th><?php echo $this->BootstrapPaginator->sort('project_status_id', '状態');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('deadline', '締め切り');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
+<?php if (isAdminUser($authUser)): ?>
 				<th class="actions"><?php echo __('操作');?></th>
+<?php endif; ?>
 			</tr>
 		<?php foreach ($projects as $project): ?>
 			<tr>
@@ -24,16 +26,19 @@
 				</td>
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
+<?php if (isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $project['Project']['id'])); ?>
 					<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $project['Project']['id']), null, __('Are you sure you want to delete # %s?', $project['Project']['id'])); ?>
 				</td>
+<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</table>
 
 		<?php echo $this->BootstrapPaginator->pagination(); ?>
 	</div>
+<?php if (isAdminUser($authUser)): ?>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
@@ -42,4 +47,5 @@
 		</ul>
 		</div>
 	</div>
+<?php endif; ?>
 </div>

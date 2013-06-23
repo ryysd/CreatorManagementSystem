@@ -17,7 +17,7 @@ class AdminController extends AppController
     {
 	parent::beforeFilter();
 	$this->layout = 'bootstrap';
-	$this->Auth->allow('add', 'login');
+	$this->Auth->allow('login');
     }
 
     public function index()
@@ -52,7 +52,7 @@ class AdminController extends AppController
 			'class' => 'alert-success'
 		    )
 		);
-		$this->redirect(array('action' => 'index'));
+		$this->redirect(array('action' => 'login'));
 	    } else {
 		$this->Session->setFlash(
 		    __('The %s could not be saved. Please, try again.', __('user')),

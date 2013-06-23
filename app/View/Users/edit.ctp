@@ -24,6 +24,7 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
+				echo $this->BootstrapForm->hidden('id');
 				?>
 				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>
 			</fieldset>

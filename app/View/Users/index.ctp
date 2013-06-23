@@ -11,7 +11,9 @@
 				<th><?php echo $this->BootstrapPaginator->sort('name', '名前');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('email', 'Email');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('role_id', '属性');?></th>
+<?php if(isAdminUser($authUser)): ?>
 				<th class="actions"><?php echo __('操作');?></th>
+<?php endif; ?>
 			</tr>
 		<?php foreach ($users as $user): ?>
 			<tr>
@@ -22,16 +24,19 @@
 				<td>
 					<?php echo h($user['Role']['name']); ?>
 				</td>
+<?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $user['User']['id'])); ?>
 					<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
 				</td>
+<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</table>
 
 		<?php echo $this->BootstrapPaginator->pagination(); ?>
 	</div>
+<?php if(isAdminUser($authUser)): ?>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
@@ -40,4 +45,5 @@
 		</ul>
 		</div>
 	</div>
+<?php endif; ?>
 </div>

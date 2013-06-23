@@ -23,6 +23,7 @@
 			</dd>
 <?php endif; ?>
 	</div>
+<?php if(isAdminUser($authUser)): ?>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
@@ -33,6 +34,7 @@
 		</ul>
 		</div>
 	</div>
+<?php endif; ?>
 </div>
 <hr>
 <div class="row-fluid">
@@ -44,7 +46,9 @@
 				<th><?php echo __('タイトル'); ?></th>
 				<th><?php echo __('状態'); ?></th>
 				<th><?php echo __('締め切り'); ?></th>
+<?php if(isAdminUser($authUser)): ?>
 				<th class="actions"><?php echo __('操作');?></th>
+<?php endif; ?>
 			</tr>
 		<?php foreach ($project['OrderLine'] as $orderLine): ?>
 			<tr>
@@ -52,10 +56,12 @@
 					<?php echo $this->Html->link($orderLine['title'], array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>
 				<td><?php echo $orderStatuses[$orderLine['order_status_id']];?></td>
 				<td><?php echo $orderLine['deadline'];?></td>
+<?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('controller' => 'order_lines', 'action' => 'edit', $orderLine['id'])); ?>
 					<?php echo $this->Form->postLink(__('削除'), array('controller' => 'order_lines', 'action' => 'delete', $orderLine['id']), null, __('Are you sure you want to delete # %s?', $orderLine['id'])); ?>
 				</td>
+<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</table>

@@ -51,15 +51,20 @@
 				<a class="brand" href="#"><?php echo __('Creator Management System'); ?></a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="/cmffs/projects">Projects</a></li>
-						<li><a href="/cmffs/users">Users</a></li>
+                                                <?php if(isset($authUser)): ?> 
+						<?php echo "<li><a href=\"".$this->webroot."users/view/".$authUser['id']."\">Home</a></li>"; ?>
+                                                <?php if(isAdminUser($authUser) || isClientUser($authUser)): ?> 
+						<?php echo "<li><a href=\"".$this->webroot."projects\">Projects</a></li>"; ?>
+						<?php echo "<li><a href=\"".$this->webroot."users\">Users</a></li>"; ?>
+	                                        <?php endif; ?>
+	                                        <?php endif; ?>
                                                         <?php
                 	                                if(isset($authUser)) {
-                	                                        echo "<li><a href=\"/cmffs/admin/logout\">Logout</a></li>";
+                	                                        echo "<li><a href=\"".$this->webroot."admin/logout"."\">Logout</a></li>";
                 					}
 							else {
-							    echo "<li><a href=\"/cmffs/admin/login\">Login</a></li>";
-                	                                    echo "<li><a href=\"/cmffs/admin/add\">Registration</a></li>";
+							    echo "<li><a href=\"".$this->webroot."/admin/login"."\">Login</a></li>";
+                	                                    echo "<li><a href=\"".$this->webroot."/admin/add"."\">Registration</a></li>";
 							}
                                                         ?>
 						<li><a href="#about">About</a></li>

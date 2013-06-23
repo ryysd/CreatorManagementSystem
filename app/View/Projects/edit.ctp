@@ -23,6 +23,7 @@
 				        'label' => '備考',
 					'type' => 'textarea'
 				));
+				echo $this->BootstrapForm->hidden('id');
 				?>
 				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>
 			</fieldset>

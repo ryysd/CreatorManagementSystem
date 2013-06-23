@@ -126,3 +126,17 @@ Configure::write('Session', array(
 
 CakePlugin::load(array('TwitterBootstrap'));
 CakePlugin::load(array('Upload'));
+
+
+
+function isAdminUser($authUser) {
+    return $authUser['role_id'] == 3;
+}
+
+function isClientUser($authUser) {
+    return $authUser['role_id'] == 2;
+}
+
+function isIllustratorUser($authUser) {
+    return $authUser['role_id'] == 1;
+}

@@ -27,11 +27,15 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                 </tr>
 		<h2><?php echo h($orderLine['OrderLine']['title']); ?></h2>
 			<td>
+<?php if (isAdminUser($authUser) || isClientUser($authUser)): ?>
 				<?php echo $this->Html->link($orderLine['Project']['title'], array('controller' => 'projects', 'action' => 'view', $orderLine['Project']['id'])); ?>
+<?php else: ?>
+				<?php echo h($orderLine['Project']['title']); ?>
+<?php endif; ?>
 				&nbsp;
 			</td>
 			<td>
-				<?php echo $this->Html->link($orderLine['OrderStatus']['name'], array('controller' => 'order_statuses', 'action' => 'view', $orderLine['OrderStatus']['id'])); ?>
+				<?php echo h($orderLine['OrderStatus']['name']); ?>
 				&nbsp;
 			</td>
 			<td>
