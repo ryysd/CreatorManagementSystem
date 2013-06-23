@@ -1,3 +1,22 @@
+<?php 
+$this->Html->script('jquery-cookie/jquery.cookie', array('inline' => false));
+$script = <<< EOT
+$(function() {
+    if($.cookie("openTag")){
+	$('a[data-toggle="tab"]').parent().removeClass('active');
+	$('a[href=#' + $.cookie("openTag") +']').click();
+  }
+
+  $('a[data-toggle="tab"]').on('shown', function (e) {
+      var tabName = e.target.href;
+      var items = tabName.split("#");
+      $.cookie("openTag",items[1], { expires: 700 });
+  });
+});
+EOT;
+echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
+?>
+
 <div class="row-fluid">
 	<div class="span9">
           <table class="table table-striped">

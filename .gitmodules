@@ -7,3 +7,6 @@
 [submodule "app/Plugin/Upload"]
 	path = app/Plugin/Upload
 	url = git@github.com:josegonzalez/upload.git
+[submodule "app/webroot/js/jquery-cookie"]
+	path = app/webroot/js/jquery-cookie
+	url = git@github.com:carhartl/jquery-cookie.git
