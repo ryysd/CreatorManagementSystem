@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		<?php echo __('Creator Management System'); ?>
+		<?php echo __('Illust Version Management System (alpha)'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +48,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#"><?php echo __('Creator Management System'); ?></a>
+				<a class="brand" href="#"><?php echo __('Illust Version Management System (alpha)'); ?></a>
 				<div class="nav-collapse">
 					<ul class="nav">
                                                 <?php if(isset($authUser)): ?> 

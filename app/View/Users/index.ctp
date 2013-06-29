@@ -6,7 +6,7 @@
 			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
 		</p>
 
-		<table class="table table-striped">
+		<table class="table table-striped table-hover">
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('name', '名前');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('email', 'Email');?></th>

@@ -1,6 +1,6 @@
 <div class="row-fluid">
 	<div class="span9">
-          <table class="table table-striped">
+          <table class="table table-striped table-hover">
 		<h2><?php  echo h($project['Project']['title']);?></h2>
                         <tr>
                           <th>状態</th>
@@ -41,7 +41,7 @@
 	<div class="span9">
 		<h3><?php echo '発注イラスト一覧'; ?></h3>
 	<?php if (!empty($project['OrderLine'])):?>
-		<table class="table table-striped">
+		<table class="table table-striped table-hover">
 			<tr>
 				<th><?php echo __('タイトル'); ?></th>
 				<th><?php echo __('状態'); ?></th>
