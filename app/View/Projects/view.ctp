@@ -54,7 +54,12 @@
 			<tr>
 				<td class="actions">
 					<?php echo $this->Html->link($orderLine['title'], array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>
-				<td><?php echo $orderStatuses[$orderLine['order_status_id']];?></td>
+	                        <?php 
+                                    $class = "label label-info";
+                                    if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_MASTER ) $class = "label label-success";
+                                    else if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_NOTACCEPTED ) $class = "label";
+                                ?>
+				<td><div class="<?php echo $class ?>"><?php echo $orderStatuses[$orderLine['order_status_id']];?></div></td>
 				<td><?php echo $orderLine['deadline'];?></td>
 <?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
