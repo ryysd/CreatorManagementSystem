@@ -126,17 +126,22 @@ Configure::write('Session', array(
 
 CakePlugin::load(array('TwitterBootstrap'));
 CakePlugin::load(array('Upload'));
-
+CakePlugin::loadAll(array(
+    'Usermgmt' => array('routes' => true, 'bootstrap' => true),
+));
 
 
 function isAdminUser($authUser) {
-    return $authUser['role_id'] == 3;
+    return true;
+    return $authUser['user_group_id'] == 3;
 }
 
 function isClientUser($authUser) {
-    return $authUser['role_id'] == 2;
+    return false;
+    return $authUser['user_group_id'] == 2;
 }
 
 function isIllustratorUser($authUser) {
-    return $authUser['role_id'] == 1;
+    return false;
+    return $authUser['user_group_id'] == 1;
 }

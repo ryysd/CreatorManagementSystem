@@ -13,10 +13,10 @@ class User extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'name';
+	public $displayField = 'username';
 
 	public $validate = Array(
-	    'name' => Array(
+	    'username' => Array(
 		'unique' => Array(
 		    'rule' => 'isUnique',
 		    'message' => 'This name is already in use.'
@@ -68,9 +68,9 @@ class User extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Role' => array(
-			'className' => 'Role',
-			'foreignKey' => 'role_id',
+		'UserGroup' => array(
+			'className' => 'UserGroup',
+			'foreignKey' => 'user_group_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
