@@ -22,7 +22,12 @@
 					<?php echo $this->Html->link($project['Project']['title'], array('controller' => 'projects', 'action' => 'view', $project['Project']['id'])); ?>
 				</td>
 				<td>
-					<?php echo h($project['ProjectStatus']['name']); ?>
+                                        <?php 
+                                          $class = "label";
+					  if ( $project['Project']['project_status_id'] == PROJECT_STATUS_COMPLETE ) $class .= " label-success";
+					  else if ( $project['Project']['project_status_id'] == PROJECT_STATUS_PROGRESS ) $class .= " label-info";
+                                        ?>
+					<div class="<?php echo $class ?>"> <?php echo h($project['ProjectStatus']['name']); ?> </div>
 				</td>
 				<td><?php echo h($project['Project']['deadline']); ?>&nbsp;</td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
