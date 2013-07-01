@@ -60,7 +60,7 @@
                                     else if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_NOTACCEPTED ) $class = "label";
                                 ?>
 				<td><div class="<?php echo $class ?>"><?php echo $orderStatuses[$orderLine['order_status_id']];?></div></td>
-				<td><?php echo datetimeToString($orderLine['deadline']);?></td>
+				<td><div class="<?php echo getDeadlineLabelClass($orderLine['deadline']); ?>"><?php echo datetimeToString($orderLine['deadline']);?></div></td>
 <?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('controller' => 'order_lines', 'action' => 'edit', $orderLine['id'])); ?>

@@ -29,7 +29,7 @@
                                         ?>
 					<div class="<?php echo $class ?>"> <?php echo h($project['ProjectStatus']['name']); ?> </div>
 				</td>
-				<td><?php echo h(datetimeToString($project['Project']['deadline'])); ?>&nbsp;</td>
+				<td><div class="<?php echo getDeadlineLabelClass($project['Project']['deadline']) ?>"><?php echo h(datetimeToString($project['Project']['deadline'])); ?>&nbsp;</div></td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
 <?php if (isAdminUser($authUser)): ?>
 				<td class="actions">

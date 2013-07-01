@@ -150,3 +150,36 @@ function datetimeToString($datetime, $string = 'Y年m月d日')
 {
 	return date($string, strtotime($datetime));
 }
+
+function isExceeded($datetime) 
+{
+    $diff = strtotime($datetime) - strtotime(date("Y-m-d"));
+    return $diff < 0;
+}
+
+function isWarning($datetime)
+{
+    $diff = strtotime($datetime) - strtotime(date("Y-m-d"));
+    return $diff < (60 * 60 * 24 * 7);
+}
+
+function isDanger($datetime)
+{
+    $diff = strtotime($datetime) - strtotime(date("Y-m-d"));
+    return $diff < (60 * 60 * 24 * 3);
+}
+
+function getDeadlineLabelClass($datetime) 
+{
+    $class = "label label-info";
+    if ( isExceeded($datetime) ) {
+	$class = "label";
+    }
+    else if ( isDanger($datetime) ) {
+	$class = "label label-important";
+    }
+    else if ( isWarning($datetime) ) {
+	$class = "label label-warning";
+    }
+    return $class;
+}
