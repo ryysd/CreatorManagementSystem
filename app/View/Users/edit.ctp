@@ -4,7 +4,7 @@
 			<fieldset>
 				<legend><?php echo __('ユーザー情報の変更'); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('name', array(
+				echo $this->BootstrapForm->input('username', array(
 				        'label' => '名前',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
@@ -19,7 +19,7 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('role_id', array(
+				echo $this->BootstrapForm->input('user_group_id', array(
 				        'label' => '属性',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')

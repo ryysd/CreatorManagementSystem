@@ -61,7 +61,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
         <?php foreach ($orderLine['User'] as $user): ?>
         <tr>
             <td>
-                <?php echo $user['name'];?>
+                <?php echo $user['username'];?>
             </td>
             <td>
                 <?php echo $user['email'];?>

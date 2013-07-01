@@ -1,10 +1,10 @@
 <div class="row-fluid">
 	<div class="span9">
-		<h2><?php echo h($user['User']['name']); ?></h2>
+		<h2><?php echo h($user['User']['username']); ?></h2>
 		<dl>
 			<dt><?php echo __('名前'); ?></dt>
 			<dd>
-				<?php echo h($user['User']['name']); ?>
+				<?php echo h($user['User']['username']); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('Email'); ?></dt>
@@ -12,14 +12,14 @@
 				<?php echo h($user['User']['email']); ?>
 				&nbsp;
 			</dd>
+			<dt><?php echo __('属性'); ?></dt>
+			<dd>
+				<?php echo h($user['UserGroup']['name']); ?>
+				&nbsp;
+			</dd>
 			<dt><?php echo __('Password'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['password']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('属性'); ?></dt>
-			<dd>
-				<?php echo h($user['Role']['name']); ?>
 				&nbsp;
 			</dd>
 			<dt><?php echo __('作成日'); ?></dt>
