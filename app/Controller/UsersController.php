@@ -126,8 +126,8 @@ class UsersController extends AppController {
 		} else {
 			$this->request->data = $this->User->read(null, $id);
 		}
-		$roles = $this->User->Role->find('list');
-		$this->set(compact('roles'));
+		$userGroups = $this->User->UserGroup->find('list');
+		$this->set(compact('userGroups'));
 	}
 
 /**
