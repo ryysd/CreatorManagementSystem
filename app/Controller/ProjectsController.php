@@ -1,5 +1,15 @@
 <?php
 App::uses('AppController', 'Controller');
+
+define("PROJECT_STATUS_PREPARE" , 1);
+define("PROJECT_STATUS_PROGRESS", 2);
+define("PROJECT_STATUS_COMPLETE", 3);
+
+define("ORDERLINE_STATUS_NOTACCEPTED", 1);
+define("ORDERLINE_STATUS_ROUGH"      , 2);
+define("ORDERLINE_STATUS_LINE"       , 3);
+define("ORDERLINE_STATUS_COLORED"    , 4);
+define("ORDERLINE_STATUS_MASTER"     , 5);
 /**
  * Projects Controller
  *
@@ -38,8 +48,32 @@ class ProjectsController extends AppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 
+	    $this->updateStatus();
 	    if (isIllustratorUser($this->Auth->user())) {
 		$this->redirect(array('controller' => 'users', 'action' => 'view/'.$this->Auth->user()['id']));
+	    }
+	}
+
+	function updateStatus() {
+	    foreach($this->Project->find('all') as $proj) {
+		$project = $proj['Project'];
+		$pre_status_id = $project['project_status_id'];
+		/*
+		echo "<pre>";
+		print_r($proj);
+		echo "</pre>";
+		 */
+		if ( empty($proj['OrderLine']) ) $project['project_status_id'] = PROJECT_STATUS_PREPARE;
+		else {
+	            $project['project_status_id'] = PROJECT_STATUS_COMPLETE;
+		    foreach($proj['OrderLine'] as $order) {
+			if( $order['order_status_id'] != ORDERLINE_STATUS_MASTER ) {
+			    $project['project_status_id'] = PROJECT_STATUS_PROGRESS;
+			    break;
+			}
+		    }
+		}
+		if ( $project['project_status_id'] != $pre_status_id ) $this->Project->save($project);
 	    }
 	}
 /**
