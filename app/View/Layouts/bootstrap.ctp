@@ -52,7 +52,7 @@
 				<div class="nav-collapse">
 					<ul class="nav">
                                                 <?php if(isset($authUser)): ?> 
-						<?php echo "<li><a href=\"".$this->webroot."users/view/".$authUser['id']."\">Home</a></li>"; ?>
+						<?php echo "<li><a href=\"".$this->webroot."dashboard"."\">Home</a></li>"; ?>
                                                 <?php if(isAdminUser($authUser) || isClientUser($authUser)): ?> 
 						<?php echo "<li><a href=\"".$this->webroot."projects\">Projects</a></li>"; ?>
 						<?php echo "<li><a href=\"".$this->webroot."users\">Users</a></li>"; ?>
@@ -60,11 +60,11 @@
 	                                        <?php endif; ?>
                                                         <?php
                 	                                if(isset($authUser)) {
-                	                                        echo "<li><a href=\"".$this->webroot."admin/logout"."\">Logout</a></li>";
+                	                                        echo "<li><a href=\"".$this->webroot."logout"."\">Logout</a></li>";
                 					}
 							else {
-							    echo "<li><a href=\"".$this->webroot."/admin/login"."\">Login</a></li>";
-                	                                    echo "<li><a href=\"".$this->webroot."/admin/add"."\">Registration</a></li>";
+							    echo "<li><a href=\"".$this->webroot."/login"."\">Login</a></li>";
+                	                                    echo "<li><a href=\"".$this->webroot."/register"."\">Registration</a></li>";
 							}
                                                         ?>
 						<li><a href="#about">About</a></li>
@@ -74,7 +74,7 @@
                                 <div class="notices pull-right">
                                         <?php
 	                                if(isset($authUser)) {
-	                                        echo "<p class=\"navbar-text\">".$authUser['name']."</p>";
+	                                        echo "<p class=\"navbar-text\">".$authUser['username']."</p>";
 					}
 	                                else echo "<p class=\"navbar-text\">Guest</p>"
                                         ?>

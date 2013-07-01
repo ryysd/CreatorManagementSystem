@@ -36,14 +36,23 @@ class AppController extends Controller {
 	'Session',
 	'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
 	'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
-	'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+	'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator',
+    'Js', 'Usermgmt.UserAuth'),
     );
 
     public $layout = 'TwitterBootstrap.default';
+    public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth');
 
     function beforeFilter() {
-	if(isset($this->Auth)) {
-	    $this->set('authUser', $this->Auth->user());
+	$this->layout = 'bootstrap';
+
+	$this->userAuth();
+	if($this->UserAuth->isLogged()) {
+	    $this->set('authUser', $this->UserAuth->GetUser()['User']);
 	}
+    }
+
+    private function userAuth(){
+	$this->UserAuth->beforeFilter($this);
     }
 }
