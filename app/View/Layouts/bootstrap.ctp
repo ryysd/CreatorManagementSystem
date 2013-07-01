@@ -12,6 +12,7 @@
 
 	<!-- Le styles -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
+	<?php //echo $this->Html->css('/usermgmt/css/umstyle'); ?>
 	<style>
 	body {
 		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
