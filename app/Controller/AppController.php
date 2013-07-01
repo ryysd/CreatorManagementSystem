@@ -44,12 +44,12 @@ class AppController extends Controller {
     public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth');
 
     function beforeFilter() {
+	$this->layout = 'bootstrap';
+
 	$this->userAuth();
-	/*
-	if(isset($this->Auth)) {
-	    $this->set('authUser', $this->Auth->user());
+	if($this->UserAuth->isLogged()) {
+	    $this->set('authUser', $this->UserAuth->GetUser()['User']);
 	}
-	 */
     }
 
     private function userAuth(){

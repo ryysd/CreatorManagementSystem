@@ -61,7 +61,7 @@ class OrderLinesController extends AppController {
 		$this->set('validOrderStatuses', $this->OrderLine->OrderStatus->find('list', 
 		    array('conditions' => array('OrderStatus.id >' => $this->OrderLine->findById($id)['OrderLine']['order_status_id']) 
 		)));
-		$this->set('userNames', $this->OrderLine->User->find('list', array('fields' => array('User.id', 'User.name'))));
+		$this->set('userNames', $this->OrderLine->User->find('list', array('fields' => array('User.id', 'User.username'))));
 	        $logs = $this->OrderLine->OrderLineLog->find('all', 
 	            array(
 	                'order' => array('OrderStatus.id DESC'),

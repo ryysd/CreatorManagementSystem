@@ -8,7 +8,7 @@
 
 		<table class="table table-striped table-hover">
 			<tr>
-				<th><?php echo $this->BootstrapPaginator->sort('name', '名前');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('username', '名前');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('email', 'Email');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('role_id', '属性');?></th>
 <?php if(isAdminUser($authUser)): ?>
@@ -18,11 +18,11 @@
 		<?php foreach ($users as $user): ?>
 			<tr>
 				<td>
-					<?php echo $this->Html->link($user['User']['name'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?>
+					<?php echo $this->Html->link($user['User']['username'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?>
 				</td>
 				<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
 				<td>
-					<?php echo h($user['Role']['name']); ?>
+					<?php echo h($user['UserGroup']['name']); ?>
 				</td>
 <?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
