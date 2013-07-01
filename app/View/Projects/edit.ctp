@@ -10,9 +10,12 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('deadline', array(
-				        'label' => '締め切り',
+					'label' => '締め切り',
 					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+					'id'=>'datepicker',
+					'type'=>'text'
+				    )
 				);
 				echo $this->BootstrapForm->input('remark', array(
 				        'label' => '備考',

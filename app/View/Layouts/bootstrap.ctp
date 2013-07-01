@@ -13,6 +13,15 @@
 	<!-- Le styles -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
 	<?php //echo $this->Html->css('/usermgmt/css/umstyle'); ?>
+        <?php echo $this->Html->script(array('jquery', 'jquery-ui')); ?>
+        <?php echo $this->Html->css('jquery-ui.css'); ?>
+        <script>
+        jQuery(function($){
+	    $("#datepicker").datepicker({
+		dateFormat: 'yy-mm-dd'
+	    });
+        });
+        </script>
 	<style>
 	body {
 		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */

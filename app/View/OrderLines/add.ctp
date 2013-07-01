@@ -16,9 +16,12 @@
 				);
 				echo $this->BootstrapForm->hidden('order_status_id', array('value' => 1));
 				echo $this->BootstrapForm->input('deadline', array(
-				        'label' => '締め切り',
+					'label' => '締め切り',
 					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+					'id'=>'datepicker',
+					'type'=>'text'
+				    )
 				);
 				echo $this->BootstrapForm->input('User', array(
 				        'label' => '担当イラストレーター'
