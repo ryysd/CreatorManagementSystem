@@ -145,3 +145,8 @@ function isIllustratorUser($authUser) {
     return false;
     return $authUser['user_group_id'] == 1;
 }
+
+function datetimeToString($datetime, $string = 'Y年m月d日')
+{
+	return date($string, strtotime($datetime));
+}

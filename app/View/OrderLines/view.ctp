@@ -38,7 +38,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
             <?php echo h($orderLine['OrderStatus']['name']); ?>&nbsp; 
         </td>
         <td>
-            <?php echo h($orderLine['OrderLine']['deadline']); ?>&nbsp; 
+            <?php echo h(datetimeToString($orderLine['OrderLine']['deadline'])); ?>&nbsp; 
         </td>
         </table>
     </div>

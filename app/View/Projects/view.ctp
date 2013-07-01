@@ -11,7 +11,7 @@
 				&nbsp;
 			</td>
 			<td>
-				<?php echo h($project['Project']['deadline']); ?>
+				<?php echo h(datetimeToString($project['Project']['deadline'])); ?>
 				&nbsp;
 			</td>
           </table>
@@ -60,7 +60,7 @@
                                     else if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_NOTACCEPTED ) $class = "label";
                                 ?>
 				<td><div class="<?php echo $class ?>"><?php echo $orderStatuses[$orderLine['order_status_id']];?></div></td>
-				<td><?php echo $orderLine['deadline'];?></td>
+				<td><?php echo datetimeToString($orderLine['deadline']);?></td>
 <?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('controller' => 'order_lines', 'action' => 'edit', $orderLine['id'])); ?>
