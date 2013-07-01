@@ -10,3 +10,6 @@
 [submodule "app/webroot/js/jquery-cookie"]
 	path = app/webroot/js/jquery-cookie
 	url = git@github.com:carhartl/jquery-cookie.git
+[submodule "app/Plugin/Usermgmt"]
+	path = app/Plugin/Usermgmt
+	url = git@github.com:chetanvarshney/User-Management-Plugin-for-Cakephp-2.x.git

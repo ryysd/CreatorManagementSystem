@@ -126,6 +126,9 @@ Configure::write('Session', array(
 
 CakePlugin::load(array('TwitterBootstrap'));
 CakePlugin::load(array('Upload'));
+CakePlugin::loadAll(array(
+    'Usermgmt' => array('routes' => true, 'bootstrap' => true),
+));
 
 
 
