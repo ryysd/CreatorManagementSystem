@@ -22,6 +22,16 @@ class UserGroupPermissionsController extends UserMgmtAppController {
 
 	var $uses = array('Usermgmt.UserGroupPermission','Usermgmt.UserGroup');
 	var $components=array('Usermgmt.ControllerList','RequestHandler');
+
+	function beforeFilter() {
+	    parent::beforeFilter();
+
+	    if ( !isAdminUser($authUser) ) {
+		    setErrorFlush($this->Session, "you don't have permission to access.");
+		    $this->redirect("/dashboard");
+	    }
+	}
+
 	/**
 	 * Used to display all permissions of site by Admin
 	 *

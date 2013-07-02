@@ -1,66 +1,33 @@
-<?php
-/*
-	This file is part of UserMgmt.
-
-	Author: Chetan Varshney (http://ektasoftwares.com)
-
-	UserMgmt is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	UserMgmt is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
-*/
-?>
-<div class="umtop">
-	<?php echo $this->Session->flash(); ?>
-	<?php echo $this->element('dashboard'); ?>
-	<div class="um_box_up"></div>
-	<div class="um_box_mid">
-		<div class="um_box_mid_content">
-			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('Change Password'); ?></span>
-				<div style="clear:both"></div>
-			</div>
-			<div class="umhr"></div>
-			<div class="um_box_mid_content_mid" id="login">
-				<div class="um_box_mid_content_mid_left">
-					<?php echo $this->Form->create('User', array('action' => 'changePassword')); ?>
-					<div>
-						<div class="umstyle3"><?php echo __('Old Password');?></div>
-						<div class="umstyle4"><?php echo $this->Form->input("oldpassword" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
-					</div>
-					<div>
-						<div class="umstyle3"><?php echo __('New Password');?></div>
-						<div class="umstyle4"><?php echo $this->Form->input("password" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
-					</div>
-					<div>
-						<div class="umstyle3"><?php echo __('Confirm Password');?></div>
-						<div class="umstyle4"><?php echo $this->Form->input("cpassword" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
-					</div>
-					<div>
-						<div class="umstyle3"></div>
-						<div class="umstyle4"><?php echo $this->Form->Submit(__('Change'));?></div>
-						<div style="clear:both"></div>
-					</div>
-					<?php echo $this->Form->end(); ?>
-				</div>
-				<div class="um_box_mid_content_mid_right" align="right"></div>
-				<div style="clear:both"></div>
-			</div>
-		</div>
+<div class="row-fluid">
+	<div class="span9">
+		<?php echo $this->BootstrapForm->create('User', array('action' => 'changePassword', 'class' => 'form-horizontal'));?>
+			<fieldset>
+				<legend><?php echo ('パスワードの編集'); ?></legend>
+				<?php
+				echo $this->BootstrapForm->input('oldpassword', array(
+				        'label' => '古いパスワード',
+					'type' => 'password',
+					'required' => 'required',
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+				);
+				echo $this->BootstrapForm->input('password', array(
+					'label' => '新しいパスワード',
+					'required' => 'required',
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+				    )
+				);
+				echo $this->BootstrapForm->input('cpassword', array(
+					'label' => '新しいパスワード(確認)',
+					'type' => 'password',
+					'required' => 'required',
+					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+				    )
+				);
+				echo $this->BootstrapForm->hidden('id');
+				?>
+				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>
+			</fieldset>
+		<?php echo $this->BootstrapForm->end();?>
 	</div>
-	<div class="um_box_down"></div>
 </div>
-<script>
-document.getElementById("UserPassword").focus();
-</script>
+

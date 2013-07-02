@@ -137,12 +137,12 @@ function isAdminUser($authUser) {
 }
 
 function isClientUser($authUser) {
-    return true;
+    return false;
     return $authUser['user_group_id'] == 2;
 }
 
 function isIllustratorUser($authUser) {
-    return false;
+    return true;
     return $authUser['user_group_id'] == 1;
 }
 

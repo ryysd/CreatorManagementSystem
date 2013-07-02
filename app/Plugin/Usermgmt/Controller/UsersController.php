@@ -36,8 +36,9 @@ class UsersController extends UserMgmtAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->User->userAuth=$this->UserAuth;
-		if ( $this->action != "login" && $this->action != "register" && $this->action != "logout" ) {
+		if ( $this->action != "login" && $this->action != "register" && $this->action != "logout" && $this->action != "changePassword") {
 		  if (!isAdminUser($this->UserAuth->getUser()['User'])) {
+		      setErrorFlush($this->Session, "you don't have permission to access.");
 		      $this->redirect('/dashboard');
 		  }
 		}

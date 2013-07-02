@@ -17,7 +17,10 @@ class UsersController extends AppController {
 
 	function beforeFilter() {
 	    parent::beforeFilter();
-	    if( $this->action != 'dashboard' && !isAdminUser($this->getAuthUser()) ) {
+	    if( ($this->action != 'dashboard' && $this->action != 'view' && $this->action != 'edit' && !isAdminUser($this->getAuthUser())) ||
+		($this->action == 'view' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]) ||
+                ($this->action == 'edit' && $this->getAuthUser()['id'] != $this->request->params['pass'][0])
+	      ) {
 		setErrorFlush($this->Session, "you don't have permission to access.");
 		$this->redirect("/dashboard");
 	    }
@@ -122,7 +125,7 @@ class UsersController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view/'.$id));
 			} else {
 				$this->Session->setFlash(
 					__('The %s could not be saved. Please, try again.', __('user')),

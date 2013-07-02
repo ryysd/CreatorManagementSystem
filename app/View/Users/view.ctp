@@ -17,17 +17,12 @@
 				<?php echo h($user['UserGroup']['name']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('Password'); ?></dt>
-			<dd>
-				<?php echo h($user['User']['password']); ?>
-				&nbsp;
-			</dd>
 			<dt><?php echo __('作成日'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['created']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('変更日'); ?></dt>
+			<dt><?php echo __('更新日'); ?></dt>
 			<dd>
 				<?php echo h($user['User']['modified']); ?>
 				&nbsp;

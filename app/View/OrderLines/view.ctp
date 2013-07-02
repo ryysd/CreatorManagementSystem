@@ -179,6 +179,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                     </a>
                 </li>
                 <li class ="span6">
+                    <?php if ( !isIllustratorUser($authUser) ): ?>
                     <?php  echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine', 'action' => 'update_status'."/".$orderLineId, 'class' => 'form-horizontal')); ?>
                     <fieldset>
                         <table class="table table-striped">
@@ -206,6 +207,9 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                         </table>
                     </fieldset>
                     <?php echo $this->BootstrapForm->end(); ?>
+		    <?php endif; ?>
+
+                    <?php if ( !isClientUser($authUser) ): ?>
                     <?php echo $this->BootstrapForm->create('OrderLine', array('controller' => 'OrderLine', 'action' => 'delete_attachment'."/".$orderLineId, 'class' => 'form-horizontal')); ?>
                     <fieldset>
                         <table class="table table-striped">
@@ -225,6 +229,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                     </fieldset>
                     <hr>
                     <?php echo $this->BootstrapForm->end(); ?>
+		    <?php endif; ?>
                     <h3>コメント</h3>
                     <?php
                                   $attachment_comments = array_filter($comments, create_function('$x',
@@ -269,6 +274,8 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
             </ul>
         </div>
     </div>
+
+    <?php if ( !isClientUser($authUser) ): ?>
     <table class="table table-striped">
     <td>
         <?php
@@ -280,12 +287,13 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                   ?>
     </td>
     </table>
+    <?php endif; ?>
 </div>
 <hr>
 <div class="row-fluid">
     <div class="span9">
         <h3>
-            <?php echo __('%s', __('コメント')); ?>
+            <?php echo __('%s', __('全体コメント')); ?>
         </h3>
         <?php if (!empty($orderLine['Comment'])):?>
         <table class="table table-striped">

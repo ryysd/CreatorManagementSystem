@@ -10,7 +10,17 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->hidden('project_status_id', array('value' => '1'));
-				echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
+				if ( isClientUser($authUser) ) {
+				  echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
+				}
+				else {
+				  echo $this->BootstrapForm->input('user_id', array(
+				  	'label' => '担当',
+				  	'required' => 'required',
+				  	'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+				      )
+				  );
+				}
 				echo $this->BootstrapForm->input('deadline', array(
 					'label' => '締め切り',
 					'required' => 'required',

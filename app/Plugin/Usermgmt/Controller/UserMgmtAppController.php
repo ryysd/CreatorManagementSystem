@@ -20,7 +20,7 @@
 class UserMgmtAppController extends AppController {
 	public $components = array('Session');
 
-	public function beforeFilter() {
-		parent::beforeFilter();
+	function beforeFilter() {
+	    parent::beforeFilter();
 	}
 }

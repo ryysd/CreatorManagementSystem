@@ -9,6 +9,17 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
+				if ( isClientUser($authUser) ) {
+				  echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
+				}
+				else {
+				  echo $this->BootstrapForm->input('user_id', array(
+				  	'label' => '担当',
+				  	'required' => 'required',
+				  	'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+				      )
+				  );
+				}
 				echo $this->BootstrapForm->input('deadline', array(
 					'label' => '締め切り',
 					'required' => 'required',
@@ -21,7 +32,6 @@
 				        'label' => '備考',
 					'type' => 'textarea'
 				));
-				echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
 				echo $this->BootstrapForm->hidden('id');
 				?>
 				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>

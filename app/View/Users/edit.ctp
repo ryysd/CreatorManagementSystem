@@ -21,11 +21,16 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				 */
-				echo $this->BootstrapForm->input('user_group_id', array(
-				        'label' => 'グループ',
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
+				if ( isAdminUser($authUser) ) {
+				  echo $this->BootstrapForm->input('user_group_id', array(
+				          'label' => 'グループ',
+				  	'required' => 'required',
+				  	'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+				  );
+				}
+				else {
+				  echo $this->BootstrapForm->hidden('user_group_id', array('value' => $authUser['user_group_id']));
+				}
 				echo $this->BootstrapForm->hidden('id');
 				?>
 				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>

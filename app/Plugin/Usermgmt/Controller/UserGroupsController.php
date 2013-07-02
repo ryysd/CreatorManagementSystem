@@ -20,6 +20,15 @@
 App::uses('UserMgmtAppController', 'Usermgmt.Controller');
 class UserGroupsController extends UserMgmtAppController {
 	public $uses = array('Usermgmt.UserGroup', 'Usermgmt.User');
+
+	function beforeFilter() {
+	    parent::beforeFilter();
+
+	    if ( !isAdminUser($authUser) ) {
+		    setErrorFlush($this->Session, "you don't have permission to access.");
+		    $this->redirect("/dashboard");
+	    }
+	}
 	/**
 	 * Used to view all groups by Admin
 	 *

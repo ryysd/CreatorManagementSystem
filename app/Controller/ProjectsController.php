@@ -131,7 +131,9 @@ class ProjectsController extends AppController {
 			}
 		}
 		$projectStatuses = $this->Project->ProjectStatus->find('list');
+		$users = $this->Project->User->find('list');
 		$this->set(compact('projectStatuses'));
+		$this->set(compact('users'));
 	}
 
 /**
@@ -170,7 +172,9 @@ class ProjectsController extends AppController {
 			$this->request->data = $this->Project->read(null, $id);
 		}
 		$projectStatuses = $this->Project->ProjectStatus->find('list');
+		$users = $this->Project->User->find('list');
 		$this->set(compact('projectStatuses'));
+		$this->set(compact('users'));
 	}
 
 /**
