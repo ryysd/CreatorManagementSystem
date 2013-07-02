@@ -38,7 +38,11 @@ class OrderLinesController extends AppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 
-	    if ( !isAdminUser($this->getAuthUser()) && $this->action != "view" ) {
+	    if ( !isAdminUser($this->getAuthUser()) && 
+		(($this->action != "view" && $this->action != "upload" && 
+		  $this->action != "delete_attachment" && $this->action != "update_status" && $this->action != "rollback_order_status")
+	        )
+	       ) {
 	        setErrorFlush($this->Session, "you don't have permission to access.");
 	        $this->redirect("/dashboard");
 	    }

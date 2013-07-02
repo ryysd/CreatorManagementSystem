@@ -51,7 +51,7 @@
 		<h3><?php echo '担当イラスト一覧'; ?></h3>
 	<?php if (!empty($user['OrderLine'])):?>
 		<p>
-			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
+			<?php //echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
 		</p>
 
 		<table class="table table-striped table-hover">
@@ -101,9 +101,10 @@
 		<h2><?php echo __('担当プロジェクト一覧');?></h2>
 
 		<p>
-			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
+			<?php //echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
 		</p>
 
+<?php if ( !empty($projects) ): ?>
 		<table class="table table-striped table-hover">
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('title', 'プロジェクト名');?></th>
@@ -112,7 +113,7 @@
 				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
 			</tr>
 		<?php foreach ($projects as $project): ?>
-                <?php if ( $project['User']['id'] == $authUser['User']['id'] ) : ?>
+                <?php //if ( $project['User']['id'] == $authUser['User']['id'] ) : ?>
 			<tr>
 				<td>
 					<?php echo $this->Html->link($project['Project']['title'], array('controller' => 'projects', 'action' => 'view', $project['Project']['id'])); ?>
@@ -128,9 +129,12 @@
 				<td><div class="<?php echo getDeadlineLabelClass($project['Project']['deadline']) ?>"><?php echo h(datetimeToString($project['Project']['deadline'])); ?>&nbsp;</div></td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
 			</tr>
-                <?php endif; ?>
+                <?php //endif; ?>
 		<?php endforeach; ?>
 		</table>
+<?php else: ?>
+        <?php echo '担当プロジェクトがありません。' ?>
+<?php endif; ?>
 
 		<?php echo $this->BootstrapPaginator->pagination(); ?>
 	</div>

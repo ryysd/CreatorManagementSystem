@@ -11,7 +11,7 @@
 				<th><?php echo $this->BootstrapPaginator->sort('title', 'プロジェクト名');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('project_status_id', '状態');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('deadline', '締め切り');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('owner', '担当');?></th>
 <?php if (isAdminUser($authUser)): ?>
 				<th class="actions"><?php echo __('操作');?></th>
 <?php endif; ?>
@@ -30,7 +30,7 @@
 					<div class="<?php echo $class ?>"> <?php echo h($project['ProjectStatus']['name']); ?> </div>
 				</td>
 				<td><div class="<?php echo getDeadlineLabelClass($project['Project']['deadline']) ?>"><?php echo h(datetimeToString($project['Project']['deadline'])); ?>&nbsp;</div></td>
-				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
+				<td><?php echo h($project['User']['username']); ?>&nbsp;</td>
 <?php if (isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $project['Project']['id'])); ?>

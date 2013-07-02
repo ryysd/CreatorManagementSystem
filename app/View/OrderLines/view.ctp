@@ -135,7 +135,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                         <?php echo "<td>$modified</td>"; ?>
                     </tr>
                     </table>
-                    <?php if($order_status_id > 1): ?>
+                    <?php if(($order_status_id > 1) && !isIllustratorUser($authUser)): ?>
                     <div class="row-fluid">
                         <?php 
                                           $pre = $orderLineLogs[0];
@@ -148,8 +148,8 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                             <?php echo $this->BootstrapForm->submit('承認を取り消す。('.$status.' -> '.$pre_order_status.')', array('div' => false, 'class' => 'btn btn-danger')); ?>
                         </fieldset>
                         <?php echo $this->BootstrapForm->end(); ?>
-                        <?php endif; ?>
                     </div>
+                    <?php endif; ?>
                 </li>
                 </ul>
                 <?php else: ?>

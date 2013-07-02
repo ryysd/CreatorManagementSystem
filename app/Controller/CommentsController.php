@@ -30,7 +30,7 @@ class CommentsController extends AppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 
-	    if ( !isAdminUser($this->getAuthUser()) ) {
+	    if ( !isAdminUser($this->getAuthUser()) && $this->action != 'add' ) {
 	        setErrorFlush($this->Session, "you don't have permission to access.");
 	        $this->redirect("/dashboard");
 	    }

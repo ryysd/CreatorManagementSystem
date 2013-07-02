@@ -19,8 +19,9 @@ class UsersController extends AppController {
 	    parent::beforeFilter();
 	    if(!isAdminUser($this->getAuthUser()) && 
 		(($this->action != 'dashboard' && $this->action != 'view' && $this->action != 'edit' ) ||
-		( $this->action == 'view' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0]) ||
-                ( $this->action == 'edit' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0]))
+		 ($this->action == 'view' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0]) ||
+		 ($this->action == 'edit' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0])
+	        )
 	      ) {
 		setErrorFlush($this->Session, "you don't have permission to access.");
 		$this->redirect("/dashboard");
@@ -192,8 +193,9 @@ class UsersController extends AppController {
 		$this->set('user', $user);
 		$this->set('orderStatuses', $this->User->OrderLine->OrderStatus->find('list'));
 		$this->set('projectNames', $this->User->OrderLine->Project->find('list'));
-		//$this->set('projects', $this->User->OrderLine->Project->find('all'));
-                $this->set('projects', $this->paginate('Project'));
-                $this->set('orderLines', $this->paginate('OrderLine'));
+		$this->set('projects', $this->paginate('Project', array(
+		    'Project.user_id' => $userId
+		)));
+		$this->set('orderLines', $this->paginate('OrderLine'));
 	}
 }
