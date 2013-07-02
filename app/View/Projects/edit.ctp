@@ -21,6 +21,7 @@
 				        'label' => '備考',
 					'type' => 'textarea'
 				));
+				echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
 				echo $this->BootstrapForm->hidden('id');
 				?>
 				<?php echo $this->BootstrapForm->submit(__('変更を適用'));?>

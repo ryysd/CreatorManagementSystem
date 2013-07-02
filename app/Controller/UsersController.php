@@ -15,12 +15,20 @@ class UsersController extends AppController {
 	public $layout = 'bootstrap';
         public $uses = array('User','Project','OrderLine');
 
+	function beforeFilter() {
+	    parent::beforeFilter();
+	    if( $this->action != 'dashboard' && !isAdminUser($this->getAuthUser()) ) {
+		$this->redirect("/dashboard");
+	    }
+	}
 /**
  * Helpers
  *
  * @var array
  */
 	public $helpers = array('TwitterBootstrap.BootstrapHtml', 'TwitterBootstrap.BootstrapForm', 'TwitterBootstrap.BootstrapPaginator', 'Js', 'Usermgmt.UserAuth');
+
+
 /**
  * Components
  *

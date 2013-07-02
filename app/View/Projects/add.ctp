@@ -10,6 +10,7 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->hidden('project_status_id', array('value' => '1'));
+				echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
 				echo $this->BootstrapForm->input('deadline', array(
 					'label' => '締め切り',
 					'required' => 'required',

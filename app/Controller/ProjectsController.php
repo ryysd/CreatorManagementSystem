@@ -49,8 +49,11 @@ class ProjectsController extends AppController {
 	    parent::beforeFilter();
 
 	    $this->updateStatus();
-	    if (isIllustratorUser($this->Auth->user())) {
-		$this->redirect(array('controller' => 'users', 'action' => 'view/'.$this->Auth->user()['id']));
+	    if ( isIllustratorUser($this->getAuthUser()) || 
+		(isClientUser($this->getAuthUser()) && $this->action != "view") || 
+		(isClientUser($this->getAuthUser()) && $this->action == "view" && 
+		 $this->Project->findById($this->request->params['pass'][0])['User']['id'] != $this->getAuthUser()['id'] ) ) {
+		     $this->redirect(array('controller' => 'users', 'action' => 'view/'.$this->Auth->user()['id']));
 	    }
 	}
 
@@ -58,11 +61,6 @@ class ProjectsController extends AppController {
 	    foreach($this->Project->find('all') as $proj) {
 		$project = $proj['Project'];
 		$pre_status_id = $project['project_status_id'];
-		/*
-		echo "<pre>";
-		print_r($proj);
-		echo "</pre>";
-		 */
 		if ( empty($proj['OrderLine']) ) $project['project_status_id'] = PROJECT_STATUS_PREPARE;
 		else {
 	            $project['project_status_id'] = PROJECT_STATUS_COMPLETE;

@@ -52,6 +52,10 @@ class AppController extends Controller {
 	}
     }
 
+    protected function getAuthUser() {
+	return $this->UserAuth->getUser()['User'];
+    }
+
     private function userAuth(){
 	$this->UserAuth->beforeFilter($this);
     }

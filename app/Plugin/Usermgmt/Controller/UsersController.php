@@ -36,6 +36,11 @@ class UsersController extends UserMgmtAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->User->userAuth=$this->UserAuth;
+		if ( $this->action != "login" && $this->action != "register" && $this->action != "logout" ) {
+		  if (!isAdminUser($this->UserAuth->getUser()['User'])) {
+		      $this->redirect('/dashboard');
+		  }
+		}
 	}
 	/**
 	 * Used to display all users by Admin
