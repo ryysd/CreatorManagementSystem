@@ -68,19 +68,43 @@
 						<?php echo "<li><a href=\"".$this->webroot."users\">Users</a></li>"; ?>
 	                                        <?php endif; ?>
 	                                        <?php endif; ?>
-                                                        <?php
-                	                                if(isset($authUser)) {
-                	                                        echo "<li><a href=\"".$this->webroot."logout"."\">Logout</a></li>";
-                					}
-							else {
-							    echo "<li><a href=\"".$this->webroot."/login"."\">Login</a></li>";
-                	                                    echo "<li><a href=\"".$this->webroot."/register"."\">Registration</a></li>";
-							}
-                                                        ?>
 						<li><a href="#about">About</a></li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
+                                        <ul class="nav pull-right">
+                                        <li class="dropdown" >
+                                            <a class="dropdown-toggle"
+                                               data-toggle="dropdown"
+                                               href="#">
+                                                  <?php
+                                        	  if(isset($authUser)) {
+                                        	          echo $authUser['username'];
+                                        	  }
+                                        	  else echo "Guest";
+                                                  ?>
+                                                <b class="caret"></b>
+                                              </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                  <?php
+                                                  if(isset($authUser)) {
+                                                          echo "<li><a href=\"".$this->webroot."users/view/".$authUser['id']."\">プロフィール確認</a></li>";
+                                                          echo "<li><a href=\"".$this->webroot."users/edit/".$authUser['id']."\">プロフィール編集</a></li>";
+                                                          echo "<li><a href=\"".$this->webroot."changePassword"."\">パスワード変更</a></li>";
+                                                          echo "<li class='divider'></li>";
+                                                          echo "<li><a href=\"".$this->webroot."logout"."\">Logout</a></li>";
+                                                  }
+                                        	  else {
+                                        	      echo "<li><a href=\"".$this->webroot."/login"."\">Login</a></li>";
+                                                      echo "<li><a href=\"".$this->webroot."/register"."\">Registration</a></li>";
+                                        	  }
+                                                  ?>
+                                              <!-- links -->
+                                            </ul>
+                                          </li>
+                                        </ul>
+
 				</div><!--/.nav-collapse -->
+<!--
                                 <div class="notices pull-right">
                                         <?php
 	                                if(isset($authUser)) {
@@ -89,6 +113,7 @@
 	                                else echo "<p class=\"navbar-text\">Guest</p>"
                                         ?>
                                 </div>
+-->
 			</div>
 		</div>
 	</div>

@@ -12,7 +12,7 @@
 				<?php echo h($user['User']['email']); ?>
 				&nbsp;
 			</dd>
-			<dt><?php echo __('属性'); ?></dt>
+			<dt><?php echo __('グループ'); ?></dt>
 			<dd>
 				<?php echo h($user['UserGroup']['name']); ?>
 				&nbsp;
