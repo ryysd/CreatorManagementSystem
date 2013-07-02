@@ -29,7 +29,7 @@
 			<div class="umhr"></div>
 			<div class="um_box_mid_content_mid">
                             <div class="hero-unit">
-                              <h1>Illust Version Management System</h1>
+                              <h1>PicHub (beta)</h1>
                               <p>ようこそ, <?php echo h($user['User']['username']); ?> さん</p>
                               <p>
                                 <a class="btn btn-primary btn-large">
