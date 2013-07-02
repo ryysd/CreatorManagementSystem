@@ -18,6 +18,11 @@ class AdminController extends AppController
 	parent::beforeFilter();
 	$this->layout = 'bootstrap';
 	$this->Auth->allow('login');
+
+	if ( !isAdminUser($this->getAuthUser()) ) {
+	    setErrorFlush($this->Session, "you don't have permission to access.");
+	    $this->redirect("/dashboard");
+	}
     }
 
     public function index()

@@ -26,7 +26,7 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<div class="umstyle1"  align="left" style="float:left"><?php echo __('User Group Permissions');?></div>
+		                <h2><?php echo __('アクセス権限');?></h2>
 				<div style="float:right">
 					<span  class="umstyle2"><?php __('Select Controller');?></span>  <?php echo $this->Form->input("controller",array('type'=>'select','div'=>false,'options'=>$allControllers,'selected'=>$c,'label'=>false,"onchange"=>"window.location='".SITE_URL."permissions/?c='+(this).value"))?>
 				</div>

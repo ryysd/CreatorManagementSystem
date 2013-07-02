@@ -17,9 +17,10 @@ class UsersController extends AppController {
 
 	function beforeFilter() {
 	    parent::beforeFilter();
-	    if( ($this->action != 'dashboard' && $this->action != 'view' && $this->action != 'edit' && !isAdminUser($this->getAuthUser())) ||
-		($this->action == 'view' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]) ||
-                ($this->action == 'edit' && $this->getAuthUser()['id'] != $this->request->params['pass'][0])
+	    if(!isAdminUser($this->getAuthUser()) && 
+		(($this->action != 'dashboard' && $this->action != 'view' && $this->action != 'edit' ) ||
+		( $this->action == 'view' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]) ||
+                ( $this->action == 'edit' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]))
 	      ) {
 		setErrorFlush($this->Session, "you don't have permission to access.");
 		$this->redirect("/dashboard");

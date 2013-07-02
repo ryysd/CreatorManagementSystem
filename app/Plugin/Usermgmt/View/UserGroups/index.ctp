@@ -25,7 +25,7 @@
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('All Groups'); ?></span>
+		                <h2><?php echo __('グループ一覧');?></h2>
 <!--
 				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 -->

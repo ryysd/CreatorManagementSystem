@@ -69,7 +69,7 @@
 	                                        <?php   endif; ?>
 	                                        <?php if(isAdminUser($authUser)): ?>
 						<?php echo "<li><a href=\"".$this->webroot."allGroups\">Groups</a></li>"; ?>
-						<?php echo "<li><a href=\"".$this->webroot."permissions\">Permissions</a></li>"; ?>
+						<?php echo "<li><a href=\"".$this->webroot."permissions?c=-1\">Permissions</a></li>"; ?>
 	                                        <?php endif; ?>
 	                                        <?php endif; ?>
 
