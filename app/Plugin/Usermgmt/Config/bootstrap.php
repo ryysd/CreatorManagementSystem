@@ -21,7 +21,7 @@ function UsermgmtInIt(&$controller) {
 	/*
 		setting default time zone for your site
 	*/
-	date_default_timezone_set ("America/New_York");
+	date_default_timezone_set ("Asia/Tokyo");
 
 
 	App::import('Helper', 'Html');
@@ -57,7 +57,7 @@ function UsermgmtInIt(&$controller) {
 		sett false you do not want verify user's email id, in this case user becomes active after registration with out email verification
 	*/
 	if(!defined("EMAIL_VERIFICATION")) {
-		define("EMAIL_VERIFICATION", true);
+		define("EMAIL_VERIFICATION", false);
 	}
 
 
