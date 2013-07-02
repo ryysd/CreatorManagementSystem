@@ -83,7 +83,7 @@
                                                href="#">
                                                   <?php
                                         	  if(isset($authUser)) {
-                                        	          echo $authUser['username'];
+                                        	          echo $authUser['User']['username'];
                                         	  }
                                         	  else echo "Guest";
                                                   ?>
@@ -92,8 +92,8 @@
                                             <ul class="dropdown-menu pull-right">
                                                   <?php
                                                   if(isset($authUser)) {
-                                                          echo "<li><a href=\"".$this->webroot."users/view/".$authUser['id']."\">プロフィール確認</a></li>";
-                                                          echo "<li><a href=\"".$this->webroot."users/edit/".$authUser['id']."\">プロフィール編集</a></li>";
+                                                          echo "<li><a href=\"".$this->webroot."users/view/".$authUser['User']['id']."\">プロフィール確認</a></li>";
+                                                          echo "<li><a href=\"".$this->webroot."users/edit/".$authUser['User']['id']."\">プロフィール編集</a></li>";
                                                           echo "<li><a href=\"".$this->webroot."changePassword"."\">パスワード変更</a></li>";
                                                           echo "<li class='divider'></li>";
                                                           echo "<li><a href=\"".$this->webroot."logout"."\">Logout</a></li>";
@@ -113,7 +113,7 @@
                                 <div class="notices pull-right">
                                         <?php
 	                                if(isset($authUser)) {
-	                                        echo "<p class=\"navbar-text\">".$authUser['username']."</p>";
+	                                        echo "<p class=\"navbar-text\">".$authUser['User']['username']."</p>";
 					}
 	                                else echo "<p class=\"navbar-text\">Guest</p>"
                                         ?>

@@ -259,7 +259,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                                         echo				$this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge'));
                                         echo				$this->BootstrapForm->submit(__('コメントを送信'), array('div' => false));
                                         echo "			</fieldset>";
-                                        echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id']));
+                                        echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['User']['id']));
                                         echo                $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
                                         echo                $this->BootstrapForm->hidden('order_line_id', array('value'=>$orderLineId));
                                         echo		$this->BootstrapForm->end();
@@ -333,7 +333,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
         <?php echo $this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge')); ?>
         <?php echo $this->BootstrapForm->submit(__('コメントを送信'), array('div' => false)); ?>
     </fieldset>
-    <?php echo $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['id'])); ?>
+    <?php echo $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['User']['id'])); ?>
     <?php echo $this->BootstrapForm->hidden('order_line_id', array('value'=>$orderLineId)); ?>
     <?php echo $this->BootstrapForm->end(); ?>
 </div>

@@ -29,7 +29,7 @@
 				  );
 				}
 				else {
-				  echo $this->BootstrapForm->hidden('user_group_id', array('value' => $authUser['user_group_id']));
+				  echo $this->BootstrapForm->hidden('user_group_id', array('value' => $authUser['User']['user_group_id']));
 				}
 				echo $this->BootstrapForm->hidden('id');
 				?>

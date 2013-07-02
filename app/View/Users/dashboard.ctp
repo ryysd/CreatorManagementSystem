@@ -112,7 +112,7 @@
 				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
 			</tr>
 		<?php foreach ($projects as $project): ?>
-                <?php if ( $project['User']['id'] == $authUser['id'] ) : ?>
+                <?php if ( $project['User']['id'] == $authUser['User']['id'] ) : ?>
 			<tr>
 				<td>
 					<?php echo $this->Html->link($project['Project']['title'], array('controller' => 'projects', 'action' => 'view', $project['Project']['id'])); ?>

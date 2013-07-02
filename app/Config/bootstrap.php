@@ -132,18 +132,15 @@ CakePlugin::loadAll(array(
 
 
 function isAdminUser($authUser) {
-    return true;
-    return $authUser['user_group_id'] == 3;
+    return $authUser['UserGroup']['name'] == 'Admin';
 }
 
 function isClientUser($authUser) {
-    return false;
-    return $authUser['user_group_id'] == 2;
+    return $authUser['UserGroup']['name'] == 'Client';
 }
 
 function isIllustratorUser($authUser) {
-    return false;
-    return $authUser['user_group_id'] == 1;
+    return $authUser['UserGroup']['name'] == 'Illustrator';
 }
 
 function datetimeToString($datetime, $string = 'Y年m月d日')

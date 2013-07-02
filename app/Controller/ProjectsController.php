@@ -53,7 +53,7 @@ class ProjectsController extends AppController {
 	    if ( isIllustratorUser($this->getAuthUser()) || 
 		(isClientUser($this->getAuthUser()) && $this->action != "view") || 
 		(isClientUser($this->getAuthUser()) && $this->action == "view" && 
-		 $this->Project->findById($this->request->params['pass'][0])['User']['id'] != $this->getAuthUser()['id'] ) ) {
+		 $this->Project->findById($this->request->params['pass'][0])['User']['id'] != $this->getAuthUser()['User']['id'] ) ) {
 		    setErrorFlush($this->Session, "you don't have permission to access.");
 		    $this->redirect(array('controller' => 'users', 'action' => 'view/'.$this->Auth->user()['id']));
 	    }

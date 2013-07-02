@@ -48,12 +48,12 @@ class AppController extends Controller {
 
 	$this->userAuth();
 	if($this->UserAuth->isLogged()) {
-	    $this->set('authUser', $this->UserAuth->GetUser()['User']);
+	    $this->set('authUser', $this->getAuthUser());
 	}
     }
 
     protected function getAuthUser() {
-	return $this->UserAuth->getUser()['User'];
+	return $this->UserAuth->getUser();
     }
 
     private function userAuth(){

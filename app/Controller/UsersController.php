@@ -19,8 +19,8 @@ class UsersController extends AppController {
 	    parent::beforeFilter();
 	    if(!isAdminUser($this->getAuthUser()) && 
 		(($this->action != 'dashboard' && $this->action != 'view' && $this->action != 'edit' ) ||
-		( $this->action == 'view' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]) ||
-                ( $this->action == 'edit' && $this->getAuthUser()['id'] != $this->request->params['pass'][0]))
+		( $this->action == 'view' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0]) ||
+                ( $this->action == 'edit' && $this->getAuthUser()['User']['id'] != $this->request->params['pass'][0]))
 	      ) {
 		setErrorFlush($this->Session, "you don't have permission to access.");
 		$this->redirect("/dashboard");

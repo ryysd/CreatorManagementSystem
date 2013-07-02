@@ -11,7 +11,7 @@
 				);
 				echo $this->BootstrapForm->hidden('project_status_id', array('value' => '1'));
 				if ( isClientUser($authUser) ) {
-				  echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['id']));
+				  echo $this->BootstrapForm->hidden('user_id', array('value' => $authUser['User']['id']));
 				}
 				else {
 				  echo $this->BootstrapForm->input('user_id', array(
