@@ -24,7 +24,7 @@ class UserGroupsController extends UserMgmtAppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 
-	    if ( !isAdminUser($authUser) ) {
+	    if ( !isAdminUser($this->getAuthUser()) ) {
 		    setErrorFlush($this->Session, "you don't have permission to access.");
 		    $this->redirect("/dashboard");
 	    }

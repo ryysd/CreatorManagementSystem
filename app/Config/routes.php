@@ -33,6 +33,7 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
         Router::connect('/users/add', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'addUser'));
+        Router::connect('/register',  array('controller' => 'users', 'action' => 'add'));
         Router::connect('/dashboard', array('controller' => 'users', 'action' => 'dashboard'));
 
 

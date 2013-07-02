@@ -37,9 +37,10 @@ class UsersController extends UserMgmtAppController {
 		parent::beforeFilter();
 		$this->User->userAuth=$this->UserAuth;
 		if ( $this->action != "login" && $this->action != "register" && $this->action != "logout" && $this->action != "changePassword") {
-		  if (!isAdminUser($this->UserAuth->getUser()['User'])) {
+		  if ( !isAdminUser($this->getAuthUser()) ) {
 		      setErrorFlush($this->Session, "you don't have permission to access.");
-		      $this->redirect('/dashboard');
+		      if( $this->action != "register" ) $this->redirect('/dashboard');
+		      else $this->redirect('/login');
 		  }
 		}
 	}
@@ -97,18 +98,18 @@ class UsersController extends UserMgmtAppController {
 				if (empty($user)) {
 					$user = $this->User->findByEmail($email);
 					if (empty($user)) {
-						$this->Session->setFlash(__('Incorrect Email/Username or Password'));
+						setErrorFlush($this->Session, __('Incorrect Email/Username or Password'));
 						return;
 					}
 				}
 				// check for inactive account
 				if ($user['User']['id'] != 1 and $user['User']['active']==0) {
-					$this->Session->setFlash(__('Sorry your account is not active, please contact to Administrator'));
+					setErrorFlush($this->Session, __('Sorry your account is not active, please contact to Administrator'));
 					return;
 				}
 				// check for verified account
 				if ($user['User']['id'] != 1 and $user['User']['email_verified']==0) {
-					$this->Session->setFlash(__('Your registration has not been confirmed please verify your email or contact to Administrator'));
+					setErrorFlush($this->Session, __('Your registration has not been confirmed please verify your email or contact to Administrator'));
 					return;
 				}
 				if(empty($user['User']['salt'])) {
@@ -116,6 +117,7 @@ class UsersController extends UserMgmtAppController {
 				} else {
 					$hashed = $this->UserAuth->makePassword($password, $user['User']['salt']);
 				}
+
 				if ($user['User']['password'] === $hashed) {
 					if(empty($user['User']['salt'])) {
 						$salt=$this->UserAuth->makeSalt();
@@ -133,7 +135,7 @@ class UsersController extends UserMgmtAppController {
 					$redirect = (!empty($OriginAfterLogin)) ? $OriginAfterLogin : LOGIN_REDIRECT_URL;
 					$this->redirect($redirect);
 				} else {
-					$this->Session->setFlash(__('Incorrect Email/Username or Password'));
+					setErrorFlush($this->Session, __('Incorrect Email/Username or Password'));
 					return;
 				}
 			}
@@ -147,7 +149,7 @@ class UsersController extends UserMgmtAppController {
 	 */
 	public function logout() {
 		$this->UserAuth->logout();
-		$this->Session->setFlash(__('You are successfully signed out'));
+		setSuccessFlush($this->Session, "You are successfully signed out");
 		$this->redirect(LOGOUT_REDIRECT_URL);
 	}
 	/**
@@ -173,7 +175,7 @@ class UsersController extends UserMgmtAppController {
 					if (!isset($this->data['User']['user_group_id'])) {
 						$this->request->data['User']['user_group_id']=DEFAULT_GROUP_ID;
 					} elseif (!$this->UserGroup->isAllowedForRegistration($this->data['User']['user_group_id'])) {
-						$this->Session->setFlash(__('Please select correct register as'));
+		                                setErrorFlush($this->Session, "Please select correct register as");
 						return;
 					}
 					$this->request->data['User']['active']=1;
@@ -201,13 +203,13 @@ class UsersController extends UserMgmtAppController {
 						$this->UserAuth->login($user);
 						$this->redirect('/');
 					} else {
-						$this->Session->setFlash(__('Please check your mail and confirm your registration'));
+		                                setSuccessFlush($this->Session, "Please check your mail and confirm your registration");
 						$this->redirect('/register');
 					}
 				}
 			}
 		} else {
-			$this->Session->setFlash(__('Sorry new registration is currently disabled, please try again later'));
+		        setErrorFlush($this->Session, "Sorry new registration is currently disabled, please try again later");
 			$this->redirect('/login');
 		}
 	}
@@ -229,7 +231,7 @@ class UsersController extends UserMgmtAppController {
 				$user['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
 				$this->User->save($user,false);
 				$this->LoginToken->deleteAll(array('LoginToken.user_id'=>$userId), false);
-				$this->Session->setFlash(__('Password changed successfully'));
+		                setSuccessFlush($this->Session, "Password changed successfully");
 				$this->redirect('/dashboard');
 			}
 		}

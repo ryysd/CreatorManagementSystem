@@ -132,7 +132,7 @@ CakePlugin::loadAll(array(
 
 
 function isAdminUser($authUser) {
-    return false;
+    return true;
     return $authUser['user_group_id'] == 3;
 }
 
@@ -142,7 +142,7 @@ function isClientUser($authUser) {
 }
 
 function isIllustratorUser($authUser) {
-    return true;
+    return false;
     return $authUser['user_group_id'] == 1;
 }
 
@@ -177,6 +177,18 @@ function setErrorFlush($session, $msg)
 	array(
 	    'plugin' => 'TwitterBootstrap',
 	    'class' => 'alert-error'
+	)
+    );
+}
+
+function setSuccessFlush($session, $msg)
+{
+    $session->setFlash(
+	__($msg),
+	'alert',
+	array(
+	    'plugin' => 'TwitterBootstrap',
+	    'class' => 'alert-success'
 	)
     );
 }
