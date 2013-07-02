@@ -32,6 +32,10 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+        Router::connect('/users/add', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'addUser'));
+        Router::connect('/dashboard', array('controller' => 'users', 'action' => 'dashboard'));
+
+
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

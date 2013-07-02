@@ -15,6 +15,7 @@ class User extends AppModel {
  */
 	public $displayField = 'username';
 
+	/*
 	public $validate = Array(
 	    'username' => Array(
 		'unique' => Array(
@@ -42,16 +43,8 @@ class User extends AppModel {
 		    'message' => 'Minimim 8 characters long.'
 		)
 	    ),
-	    /*
-	    'role' => Array(
-		'valid' => Array(
-		    'rule' => Array('inList', Array('admin', 'staff', 'author')),
-		    'message' => '権限を選択してください。',
-		    'allowEmpty' => false
-		)
-	    )
-	     */
 	);
+	 */
 
 	public function beforeSave($options = null) {
 	    if (isset($this->data[$this->alias]['password'])) {
@@ -67,6 +60,7 @@ class User extends AppModel {
  *
  * @var array
  */
+	/*
 	public $belongsTo = array(
 		'UserGroup' => array(
 			'className' => 'UserGroup',
@@ -74,6 +68,25 @@ class User extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		)
+	);
+	 */
+
+	public $hasAndBelongsToMany = array(
+		'OrderLine' => array(
+			'className' => 'OrderLine',
+			'joinTable' => 'order_lines_users',
+			'foreignKey' => 'user_id',
+			'associationForeignKey' => 'order_line_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 }

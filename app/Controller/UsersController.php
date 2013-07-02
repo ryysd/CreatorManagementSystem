@@ -13,13 +13,14 @@ class UsersController extends AppController {
  * @var string
  */
 	public $layout = 'bootstrap';
+        public $uses = array('User','Project','OrderLine');
 
 /**
  * Helpers
  *
  * @var array
  */
-	public $helpers = array('TwitterBootstrap.BootstrapHtml', 'TwitterBootstrap.BootstrapForm', 'TwitterBootstrap.BootstrapPaginator');
+	public $helpers = array('TwitterBootstrap.BootstrapHtml', 'TwitterBootstrap.BootstrapForm', 'TwitterBootstrap.BootstrapPaginator', 'Js', 'Usermgmt.UserAuth');
 /**
  * Components
  *
@@ -87,8 +88,8 @@ class UsersController extends AppController {
 				);
 			}
 		}
-		$roles = $this->User->Role->find('list');
-		$this->set(compact('roles'));
+		$userGroups = $this->User->UserGroup->find('list');
+		$this->set(compact('userGroups'));
 	}
 
 /**
@@ -164,5 +165,22 @@ class UsersController extends AppController {
 			)
 		);
 		$this->redirect(array('action' => 'index'));
+	}
+
+	/**
+	 * Used to show dashboard of the user
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function dashboard() {
+		$userId=$this->UserAuth->getUserId();
+		$user = $this->User->findById($userId);
+		$this->set('user', $user);
+		$this->set('orderStatuses', $this->User->OrderLine->OrderStatus->find('list'));
+		$this->set('projectNames', $this->User->OrderLine->Project->find('list'));
+		//$this->set('projects', $this->User->OrderLine->Project->find('all'));
+                $this->set('projects', $this->paginate('Project'));
+                $this->set('orderLines', $this->paginate('OrderLine'));
 	}
 }
