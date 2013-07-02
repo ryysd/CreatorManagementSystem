@@ -60,7 +60,6 @@ class User extends AppModel {
  *
  * @var array
  */
-	/*
 	public $belongsTo = array(
 		'UserGroup' => array(
 			'className' => 'UserGroup',
@@ -70,7 +69,6 @@ class User extends AppModel {
 			'order' => ''
 		)
 	);
-	 */
 
 	public $hasAndBelongsToMany = array(
 		'OrderLine' => array(
