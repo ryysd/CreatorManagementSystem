@@ -37,7 +37,7 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 		<?php   if (!empty($controllers)) { ?>
 					<input type="hidden" id="BASE_URL" value="<?php echo SITE_URL?>">
 					<input type="hidden" id="groups" value="<?php echo $groups?>">
-					<table cellspacing="0" cellpadding="0" width="100%" border="0">
+					<table cellspacing="0" cellpadding="0" width="100%" border="0" class="table table-hover">
 						<thead>
 							<tr>
 								<th> <?php echo __("Controller");?> </th>
@@ -69,11 +69,11 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 										} else {
 											$checked=false;
 										}
-										echo $this->Form->input($ugname,array('id'=>$ugname_alias.$k,'type'=>'checkbox','checked'=>$checked));
+										echo $this->BootstrapForm->input($ugname,array('label' => $ugname,'id'=>$ugname_alias.$k,'type'=>'checkbox','checked'=>$checked));
 									}
 									echo "</td>";
 									echo "<td>";
-									echo $this->Form->button('Update', array('type'=>'button','id'=>'mybutton123','name'=>$k,'onClick'=>'javascript:update_fields('.$k.');', 'class'=>'umbtn'));
+									echo $this->Form->button('Update', array('type'=>'button','id'=>'mybutton123','name'=>$k,'onClick'=>'javascript:update_fields('.$k.');', 'class'=>'btn btn-large btn-primary'));
 									echo "<div id='updateDiv".$k."' align='right' class='updateDiv'>&nbsp;</div>";
 									echo "</td>";
 									echo "</tr>";

@@ -20,7 +20,7 @@
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('role_id', array(
-				        'label' => '属性',
+				        'label' => 'グループ',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);

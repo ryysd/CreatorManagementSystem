@@ -26,7 +26,6 @@
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<!--<span class="umstyle1"><?php echo __('Dashboard'); ?></span>-->
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
@@ -40,6 +39,7 @@
                                 </a>
                               </p>
                             </div>
+<!--
 				<div class="um_box_mid_content_mid_left">
 					<br/><br/>
 			<?php   if ($this->UserAuth->getGroupName()=='Admin') { ?>
@@ -54,6 +54,7 @@
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Change Password",true),"/changePassword") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Profile",true),"/myprofile") ?></span><br/><br/>
 				</div>
+-->
 				<div class="um_box_mid_content_mid_right" align="right"></div>
 				<div style="clear:both"></div>
 			</div>

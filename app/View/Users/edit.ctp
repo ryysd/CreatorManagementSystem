@@ -14,13 +14,15 @@
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
+				/*
 				echo $this->BootstrapForm->input('password', array(
 				        'label' => 'パスワード',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
+				 */
 				echo $this->BootstrapForm->input('user_group_id', array(
-				        'label' => '属性',
+				        'label' => 'グループ',
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
