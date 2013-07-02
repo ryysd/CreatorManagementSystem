@@ -56,7 +56,7 @@
 
 		<table class="table table-striped table-hover">
 			<tr>
-				<th><?php echo $this->BootstrapPaginator->sort((''), __('プロジェクト')); ?></th>
+				<th><?php echo $this->BootstrapPaginator->sort(('Project.title'), __('プロジェクト')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('title'), __('タイトル')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('order_status_id'), __('状態')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('deadline'), __('締め切り')); ?></th>
