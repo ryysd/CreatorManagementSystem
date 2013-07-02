@@ -34,6 +34,15 @@ class OrderLinesController extends AppController {
 		'authenticate' => Array('Form' => Array('fields' => Array('username' => 'email')))
 	    )
 	);
+
+	function beforeFilter() {
+	    parent::beforeFilter();
+
+	    if ( !isAdminUser($this->getAuthUser()) && $this->action != "view" ) {
+	        setErrorFlush($this->Session, "you don't have permission to access.");
+	        $this->redirect("/dashboard");
+	    }
+	}
 /**
  * index method
  *

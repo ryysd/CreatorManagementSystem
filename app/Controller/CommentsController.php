@@ -26,6 +26,15 @@ class CommentsController extends AppController {
  * @var array
  */
 	public $components = array('Session');
+
+	function beforeFilter() {
+	    parent::beforeFilter();
+
+	    if ( !isAdminUser($this->getAuthUser()) ) {
+	        setErrorFlush($this->Session, "you don't have permission to access.");
+	        $this->redirect("/dashboard");
+	    }
+	}
 /**
  * index method
  *

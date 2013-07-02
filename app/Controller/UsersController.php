@@ -18,6 +18,7 @@ class UsersController extends AppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 	    if( $this->action != 'dashboard' && !isAdminUser($this->getAuthUser()) ) {
+		setErrorFlush($this->Session, "you don't have permission to access.");
 		$this->redirect("/dashboard");
 	    }
 	}

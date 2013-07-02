@@ -169,6 +169,18 @@ function isDanger($datetime)
     return $diff < (60 * 60 * 24 * 3);
 }
 
+function setErrorFlush($session, $msg)
+{
+    $session->setFlash(
+	__($msg),
+	'alert',
+	array(
+	    'plugin' => 'TwitterBootstrap',
+	    'class' => 'alert-error'
+	)
+    );
+}
+
 function getDeadlineLabelClass($datetime) 
 {
     $class = "label label-info";
