@@ -112,6 +112,7 @@
 				<th><?php echo $this->BootstrapPaginator->sort('remark', '備考');?></th>
 			</tr>
 		<?php foreach ($projects as $project): ?>
+                <?php if ( $project['User']['id'] == $authUser['id'] ) : ?>
 			<tr>
 				<td>
 					<?php echo $this->Html->link($project['Project']['title'], array('controller' => 'projects', 'action' => 'view', $project['Project']['id'])); ?>
@@ -127,6 +128,7 @@
 				<td><div class="<?php echo getDeadlineLabelClass($project['Project']['deadline']) ?>"><?php echo h(datetimeToString($project['Project']['deadline'])); ?>&nbsp;</div></td>
 				<td><?php echo h($project['Project']['remark']); ?>&nbsp;</td>
 			</tr>
+                <?php endif; ?>
 		<?php endforeach; ?>
 		</table>
 
