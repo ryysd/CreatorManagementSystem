@@ -275,8 +275,16 @@ class UsersController extends UserMgmtAppController {
 				$this->request->data['User']['salt'] = $salt;
 				$this->request->data['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
 				$this->User->save($this->request->data,false);
-				$this->Session->setFlash(__('The user is successfully added'));
-				$this->redirect('/addUser');
+				//$this->Session->setFlash(__('The user is successfully added'));
+				$this->Session->setFlash(
+				    __('The %s has been saved', __('user')),
+				    'alert',
+				    array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+				    )
+				);
+				$this->redirect('/users');
 			}
 		}
 	}

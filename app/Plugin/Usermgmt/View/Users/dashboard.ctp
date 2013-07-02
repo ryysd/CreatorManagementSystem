@@ -32,7 +32,7 @@
 			<div class="um_box_mid_content_mid">
                             <div class="hero-unit">
                               <h1>Illust Version Management System</h1>
-                              <p>Hello, <?php echo h($user['User']['first_name']).' '.h($user['User']['last_name']); ?>!</p>
+                              <p>Hello, <?php echo h($user['User']['username']); ?>!</p>
                               <p>
                                 <a class="btn btn-primary btn-large">
                                   Learn more

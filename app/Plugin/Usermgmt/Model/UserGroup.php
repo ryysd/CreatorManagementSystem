@@ -173,7 +173,7 @@ class UserGroup extends UserMgmtAppModel {
 		$this->unbindModel(array('hasMany' => array('UserGroupPermission')));
 		$result=$this->find("all", array("order"=>"id", "conditions"=>array('name !='=>"Guest")));
 		$user_groups=array();
-		$user_groups[0]='Select';
+		//$user_groups[0]='Select';
 		foreach ($result as $row) {
 			$user_groups[$row['UserGroup']['id']]=$row['UserGroup']['name'];
 		}

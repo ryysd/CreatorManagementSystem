@@ -18,6 +18,7 @@
 	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
+<!--
 <div id="dashboard">
 	<div style="float:left"><?php echo $this->Html->link(__("Dashboard",true),"/dashboard") ?></div>
 <?php   if ($this->UserAuth->isAdmin()) { ?>
@@ -35,3 +36,4 @@
 	<div style="float:right;padding-left:10px"><?php echo $this->Html->link(__("Sign Out",true),"/logout") ?></div>
 	<div style="clear:both"></div>
 </div>
+-->
