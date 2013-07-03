@@ -56,8 +56,8 @@
 
 		<table class="table table-striped table-hover">
 			<tr>
-				<th><?php echo $this->BootstrapPaginator->sort(('Project.title'), __('プロジェクト')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('title'), __('タイトル')); ?></th>
+				<th><?php echo $this->BootstrapPaginator->sort(('Project.title'), __('プロジェクト')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('order_status_id'), __('状態')); ?></th>
 				<th><?php echo $this->BootstrapPaginator->sort(('deadline'), __('締め切り')); ?></th>
 <?php if(isAdminUser($authUser)): ?>
@@ -67,14 +67,14 @@
 		<?php foreach ($orderLines as $_orderLine): ?>
 <?php $orderLine = $_orderLine['OrderLine'] ?>
 			<tr>
-				<td> <?php echo h($projectNames[$orderLine['project_id']]); ?> </td>
 				<td class="actions">
 					<?php echo $this->Html->link($orderLine['title'], array('controller' => 'order_lines', 'action' => 'view', $orderLine['id'])); ?>
 	                        <?php 
                                     $class = "label label-info";
                                     if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_MASTER ) $class = "label label-success";
                                     else if ( $orderLine['order_status_id'] == ORDERLINE_STATUS_NOTACCEPTED ) $class = "label";
-                                ?>
+				    ?></td>
+				<td> <?php echo h($projectNames[$orderLine['project_id']]); ?> </td>
 				<td><div class="<?php echo $class ?>"><?php echo $orderStatuses[$orderLine['order_status_id']];?></div></td>
 				<td><div class="<?php echo getDeadlineLabelClass($orderLine['deadline']); ?>"><?php echo datetimeToString($orderLine['deadline']);?></div></td>
 <?php if(isAdminUser($authUser)): ?>
