@@ -159,7 +159,12 @@ class OrderLinesController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				$this->redirect(array('action' => 'index'));
+				if ($project_id != null) {
+				        $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
+				    }
+				else {
+				    $this->redirect(array('controller' => 'projects', 'action' => 'index'));
+				}
 			} else {
 				$this->Session->setFlash(
 					__('The %s could not be saved. Please, try again.', __('order line')),
@@ -209,7 +214,12 @@ class OrderLinesController extends AppController {
 					'class' => 'alert-success'
 				)
 			);
-			$this->redirect(array('action' => 'index'));
+			if ($project_id != null) {
+			        $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
+			    }
+			else {
+			    $this->redirect(array('controller' => 'projects', 'action' => 'index'));
+			}
 		}
 		$this->Session->setFlash(
 			__('The %s was not deleted', __('order line')),
