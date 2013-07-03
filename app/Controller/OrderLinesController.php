@@ -175,7 +175,14 @@ class OrderLinesController extends AppController {
 		}
 		$projects = $this->OrderLine->Project->find('list');
 		$orderStatuses = $this->OrderLine->OrderStatus->find('list');
-		$users = $this->OrderLine->User->find('list');
+		$illustrator = $this->OrderLine->User->UserGroup->find('all', array('conditions' => array(
+		    'UserGroup.name' => 'Illustrator'
+		)));
+		$illustrator_id = $illustrator['0']['UserGroup']['id'];
+
+		$users = $this->OrderLine->User->find('list', array('conditions' => array(
+		    'User.user_group_id' => $illustrator_id 
+		)));
 		$this->set(compact('projects', 'orderStatuses', 'users'));
 	}
 
