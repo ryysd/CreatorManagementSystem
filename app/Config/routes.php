@@ -35,6 +35,8 @@
         Router::connect('/users/add', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'addUser'));
         Router::connect('/register',  array('controller' => 'users', 'action' => 'add'));
         Router::connect('/dashboard', array('controller' => 'users', 'action' => 'dashboard'));
+        Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact'));
+        Router::connect('/about', array('controller' => 'pages', 'action' => 'about'));
 
 
 /**

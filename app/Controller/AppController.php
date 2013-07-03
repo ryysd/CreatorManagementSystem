@@ -21,6 +21,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
@@ -58,5 +59,20 @@ class AppController extends Controller {
 
     private function userAuth(){
 	$this->UserAuth->beforeFilter($this);
+    }
+
+    public function sendEmail() {
+	$ary_body = array (
+	    'name' => 'テストnameです',
+	    'msg'    => 'テストです。ありがとうございました。',
+	);
+	$email = new CakeEmail('gmail');
+	$mailRespons = $email->config(array('log' => 'emails'))
+	    ->template('email', 'email_layout')
+	    ->viewVars($ary_body)
+	    ->from(array('freedomspeech.pichub@gmail.com' => 'PicHub'))
+	    ->to('ry.ysd01@gmail.com')
+	    ->subject('title')
+	    ->send();
     }
 }
