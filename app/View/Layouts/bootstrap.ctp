@@ -23,6 +23,33 @@
         });
         </script>
 	<style>
+        html,
+        body {
+          height: 100%;
+          /* The html and body elements cannot have any padding or margin. */
+        }
+	#wrap {
+	        min-height: 100%;
+	        height: auto !important;
+	        height: 100%;
+	        /* Negative indent footer by it's height */
+	        margin: 0 auto -60px;	
+	}
+        #push,
+        #footer {
+               height: 60px;
+        }
+        #footer {
+               background-color: #f5f5f5;
+        }
+        @media (max-width: 767px) {
+          #footer {
+	            margin-left: -20px;
+	            margin-right: -20px;
+	            padding-left: 20px;
+	            padding-right: 20px;
+	          }
+	}
 	body {
 		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 	}
@@ -123,16 +150,25 @@
 		</div>
 	</div>
 
-	<div class="container">
 
-		<!--<h1>Bootstrap starter template</h1>-->
+        <div id="wrap">
+	    <div class="container">
 
-		<?php echo $this->Session->flash(); ?>
+	    	<!--<h1>Bootstrap starter template</h1>-->
 
-		<?php echo $this->fetch('content'); ?>
+	    	<?php echo $this->Session->flash(); ?>
 
-	</div> <!-- /container -->
+	    	<?php echo $this->fetch('content'); ?>
 
+	    </div> <!-- /container -->
+          <div id="push"></div>
+	</div>
+
+<div id="footer">
+  <div class="container" align="center">
+     <p><small>(c) copyright 2013 株式会社Freedom Speech.</small></p>
+  </div>
+</div>
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
