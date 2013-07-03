@@ -49,7 +49,7 @@ class ProjectsController extends AppController {
 	    parent::beforeFilter();
 
 	    $authUser = $this->getAuthUser();
-	    $project = $this->Project->findById($this->request->params['pass'][0]);
+	    $project = $this->action == "view" ? $this->Project->findById($this->request->params['pass'][0]) : null;
 	    $this->updateStatus();
 	    // client user can watch project that he created.
 	    if ( isIllustratorUser($this->getAuthUser()) || 
