@@ -2,6 +2,6 @@
 /app/Config/database.php
 /app/webroot/files/attachment/*
 .DS_Store
-.project
+*.project
 *.swp
 tags
