@@ -94,7 +94,6 @@ class OrderLinesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->OrderLine->create();
 			if ($this->OrderLine->save($this->request->data)) {
-			    print_r($this->request->data);
 				    $this->Session->setFlash(
 				    	__('The %s has been saved', __('order line')),
 				    	'alert',
