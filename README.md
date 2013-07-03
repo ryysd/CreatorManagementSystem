@@ -6,6 +6,7 @@ Creator Management System for Freedom Speech
 2. git submodule init
 3. git submodule update
 4. git submodule foreach 'git pull origin master' or git submodule foreach 'git checkout master; git pull'
+
 ### Prepare Cake-PHP
 1. Install Setup Script: https://github.com/tkyk/cakephp-git-starter
 2. Run Script
