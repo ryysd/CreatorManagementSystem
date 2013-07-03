@@ -48,12 +48,14 @@ class ProjectsController extends AppController {
 	function beforeFilter() {
 	    parent::beforeFilter();
 
+	    $authUser = $this->getAuthUser();
+	    $project = $this->Project->findById($this->request->params['pass'][0]);
 	    $this->updateStatus();
 	    // client user can watch project that he created.
 	    if ( isIllustratorUser($this->getAuthUser()) || 
 		(isClientUser($this->getAuthUser()) && $this->action != "view") || 
 		(isClientUser($this->getAuthUser()) && $this->action == "view" && 
-		 $this->Project->findById($this->request->params['pass'][0])['User']['id'] != $this->getAuthUser()['User']['id'] ) ) {
+		 $project['User']['id'] != $authUser['User']['id'] ) ) {
 		    setErrorFlush($this->Session, "you don't have permission to access.");
 		    $this->redirect('/dashboard');
 	    }
@@ -131,9 +133,10 @@ class ProjectsController extends AppController {
 			}
 		}
 		$projectStatuses = $this->Project->ProjectStatus->find('list');
-		$client_id = $this->Project->User->UserGroup->find('all', array('conditions' => array(
+		$client = $this->Project->User->UserGroup->find('all', array('conditions' => array(
 		    'UserGroup.name' => 'Client'
-		)))['0']['UserGroup']['id'];
+		)));
+		$client_id = $client['0']['UserGroup']['id'];
 
 		$users = $this->Project->User->find('list', array('conditions' => array(
 		    'User.user_group_id' => $client_id 

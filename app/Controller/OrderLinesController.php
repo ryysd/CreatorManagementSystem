@@ -68,11 +68,12 @@ class OrderLinesController extends AppController {
 		if (!$this->OrderLine->exists()) {
 			throw new NotFoundException(__('Invalid %s', __('order line')));
 		}
+                $orderLine = $this->OrderLine->findById($id);
 		$this->set('orderLine', $this->OrderLine->read(null, $id));
 		$this->set('attachments', $this->OrderLine->Attachment->find('all', array('conditions' => array('Attachment.foreign_key' => $id))));
 		$this->set('orderStatuses', $this->OrderLine->OrderStatus->find('list'));
 		$this->set('validOrderStatuses', $this->OrderLine->OrderStatus->find('list', 
-		    array('conditions' => array('OrderStatus.id >' => $this->OrderLine->findById($id)['OrderLine']['order_status_id']) 
+		    array('conditions' => array('OrderStatus.id >' => $orderLine['OrderLine']['order_status_id']) 
 		)));
 		$this->set('userNames', $this->OrderLine->User->find('list', array('fields' => array('User.id', 'User.username'))));
 	        $logs = $this->OrderLine->OrderLineLog->find('all', 
@@ -127,9 +128,10 @@ class OrderLinesController extends AppController {
 		}
 		$orderStatuses = $this->OrderLine->OrderStatus->find('list');
 		
-		$illustrator_id = $this->OrderLine->User->UserGroup->find('all', array('conditions' => array(
+		$illustrator = $this->OrderLine->User->UserGroup->find('all', array('conditions' => array(
 		    'UserGroup.name' => 'Illustrator'
-		)))['0']['UserGroup']['id'];
+		)));
+		$illustrator_id = $illustrator['0']['UserGroup']['id'];
 
 		$users = $this->OrderLine->User->find('list', array('conditions' => array(
 		    'User.user_group_id' => $illustrator_id 
