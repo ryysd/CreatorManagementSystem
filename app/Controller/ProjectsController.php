@@ -131,7 +131,13 @@ class ProjectsController extends AppController {
 			}
 		}
 		$projectStatuses = $this->Project->ProjectStatus->find('list');
-		$users = $this->Project->User->find('list');
+		$client_id = $this->Project->User->UserGroup->find('all', array('conditions' => array(
+		    'UserGroup.name' => 'Client'
+		)))['0']['UserGroup']['id'];
+
+		$users = $this->Project->User->find('list', array('conditions' => array(
+		    'User.user_group_id' => $client_id 
+		)));
 		$this->set(compact('projectStatuses'));
 		$this->set(compact('users'));
 	}
