@@ -159,6 +159,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                 <?php endif; ?>
             </div>
             <?php
+                  $projectId = $orderLine['Project']['id'];
                   // tab contents
                   for ($i = 0; $i < $photo_num; $i++) { 
                       $attachment = $attachments[$i];
@@ -262,6 +263,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                                         echo                $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['User']['id']));
                                         echo                $this->BootstrapForm->hidden('attachment_id', array('value'=>$attachmentId));
                                         echo                $this->BootstrapForm->hidden('order_line_id', array('value'=>$orderLineId));
+                                        echo                $this->BootstrapForm->hidden('project_id', array('value'=>$projectId));
                                         echo		$this->BootstrapForm->end();
                                     ?>
                     </div>

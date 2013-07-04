@@ -63,11 +63,12 @@ class AppController extends Controller {
 
     public function sendEmail($to, $subject, $text_template, $layout_template, $data) {
 	$email = new CakeEmail('gmail');
+	$email->charset = "ISO-2022-JP";
 	$mailRespons = $email->config(array('log' => 'emails'))
 	    ->template($text_template, $layout_template)
 	    ->viewVars($data)
 	    ->from(array('freedomspeech.pichub@gmail.com' => 'PicHub'))
-	    ->to('ry.ysd01@gmail.com'/*$to*/)
+	    ->to($to)
 	    ->subject($subject)
 	    ->send();
     }

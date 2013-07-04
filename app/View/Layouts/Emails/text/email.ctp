@@ -19,4 +19,15 @@
 
 <?php echo $this->fetch('content'); ?>
 
-This email was sent using the CakePHP Framework, http://cakephp.org.
+
+
+※ このメールは送信専用です。
+※ お問い合わせは下記よりお願いいたします。
+----------------------------------------------------------------------------
+株式会社フリーダムスピーチ(FreedomSpeech)
+PicHub運営事務局
+〒160-0023 東京都西新宿6-12-7 ストーク新宿1F 
+問い合わせ http://www.freedomspeech.jp/?page_id=32 
+
+- FreedomSpeechホームページ http://www.freedomspeech.jp/
+----------------------------------------------------------------------------

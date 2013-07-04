@@ -76,6 +76,7 @@ class CommentsController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
+				//$this->sendNotifyMail("","","","","","","");
 				$this->redirect(array('controller' => 'OrderLines', 'action' => 'view', $this->request->data['Comment']['order_line_id']));
 			} else {
 				$this->Session->setFlash(
@@ -93,6 +94,31 @@ class CommentsController extends AppController {
 		$orderLines = $this->Comment->OrderLine->find('list');
 		$attachments = $this->Comment->Attachment->find('list');
 		$this->set(compact('users', 'orderLines', 'attachments'));
+	}
+
+	public function sendNotifyMail($to, $user_id, $project_id, $order_id, $order_tab_id, $from_name, $comment) {
+	    $to           = "ry.ysd01@gmail.com";
+	    $to_name      = "user name";
+	    $project_name = "project";
+	    $project_url  = "http://www.~";
+	    $illust_name  = "illust";
+	    $illust_url   = "http://www.~";
+	    $order_tab_name = "tab";
+	    $from_name    = "from";
+	    $comment = "test message";
+	    
+	    $data = array(
+		'to_name'      => $to_name,
+		'project_name' => $project_name,
+		'project_url'  => $project_url,
+		'illust_name'  => $illust_name,
+		'illust_url'   => $illust_url,
+		'illust_id'    => $order_tab_name,
+		'from_name'    => $from_name,
+		'comment'      => $comment
+	    );
+
+	    $this->sendEmail("ry.ysd01@gmail.com", "Comment", "notify_comment", "email", $data);
 	}
 
 /**
