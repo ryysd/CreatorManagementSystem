@@ -61,18 +61,14 @@ class AppController extends Controller {
 	$this->UserAuth->beforeFilter($this);
     }
 
-    public function sendEmail() {
-	$ary_body = array (
-	    'name' => 'テストnameです',
-	    'msg'    => 'テストです。ありがとうございました。',
-	);
+    public function sendEmail($to, $subject, $text_template, $layout_template, $data) {
 	$email = new CakeEmail('gmail');
 	$mailRespons = $email->config(array('log' => 'emails'))
-	    ->template('email', 'email_layout')
-	    ->viewVars($ary_body)
+	    ->template($text_template, $layout_template)
+	    ->viewVars($data)
 	    ->from(array('freedomspeech.pichub@gmail.com' => 'PicHub'))
-	    ->to('ry.ysd01@gmail.com')
-	    ->subject('title')
+	    ->to('ry.ysd01@gmail.com'/*$to*/)
+	    ->subject($subject)
 	    ->send();
     }
 }
