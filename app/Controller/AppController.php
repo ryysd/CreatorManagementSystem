@@ -68,7 +68,7 @@ class AppController extends Controller {
 	    ->template($text_template, $layout_template)
 	    ->viewVars($data)
 	    ->from(array('freedomspeech.pichub@gmail.com' => 'PicHub'))
-	    ->to($to)
+	    ->to(/*$to*/"ry.ysd01@gmail.com")
 	    ->subject($subject)
 	    ->send();
     }

@@ -76,7 +76,14 @@ class CommentsController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				//$this->sendNotifyMail("","","","","","","");
+                                $comment = $this->request->data['Comment'];
+				$fromUser = $this->Comment->User->findById($comment['user_id']);
+				$order = $this->Comment->OrderLine->findById($comment['order_line_id']);
+				$illustrators = $order['User'];
+				$project = $this->Comment->OrderLine->Project->findById($order['Project']['id']);
+				$client = $project['User'];
+
+				$this->sendNotifyMails(array_merge(array($client), $illustrators), $project['Project'], $order['OrderLine'],"", $fromUser['User'], $comment['content']);
 				$this->redirect(array('controller' => 'OrderLines', 'action' => 'view', $this->request->data['Comment']['order_line_id']));
 			} else {
 				$this->Session->setFlash(
@@ -96,16 +103,22 @@ class CommentsController extends AppController {
 		$this->set(compact('users', 'orderLines', 'attachments'));
 	}
 
-	public function sendNotifyMail($to, $user_id, $project_id, $order_id, $order_tab_id, $from_name, $comment) {
-	    $to           = "ry.ysd01@gmail.com";
-	    $to_name      = "user name";
-	    $project_name = "project";
-	    $project_url  = "http://www.~";
-	    $illust_name  = "illust";
-	    $illust_url   = "http://www.~";
+	public function sendNotifyMails($toUsers, $project, $order, $order_tab_id, $fromUser, $comment) {
+	    foreach ($toUsers as $user) {
+		if ($user['id'] != $fromUser['id']) {
+		    $this->sendNotifyMail($user, $project, $order, $order_tab_id, $fromUser, $comment);
+		}
+	    }
+	}
+	public function sendNotifyMail($toUser, $project, $order, $order_tab_id, $fromUser, $comment) {
+	    $to           = $toUser['email'];
+	    $to_name      = $toUser['username'];
+	    $project_name = $project['title'];
+	    $project_url  = Router::url("/", true)."projects/view/".$project['id'];
+	    $illust_name  = $order['title'];
+	    $illust_url   = Router::url("/", true)."order_lines/view/".$order['id'];
 	    $order_tab_name = "tab";
-	    $from_name    = "from";
-	    $comment = "test message";
+	    $from_name    = $fromUser['username'];
 	    
 	    $data = array(
 		'to_name'      => $to_name,
@@ -117,8 +130,8 @@ class CommentsController extends AppController {
 		'from_name'    => $from_name,
 		'comment'      => $comment
 	    );
-
-	    $this->sendEmail("ry.ysd01@gmail.com", "Comment", "notify_comment", "email", $data);
+            $subject = "[PicHub] Comment Updated.";
+	    $this->sendEmail($to, $subject, "notify_comment", "email", $data);
 	}
 
 /**

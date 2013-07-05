@@ -204,3 +204,10 @@ function getDeadlineLabelClass($datetime)
     }
     return $class;
 }
+
+function array_flatten($array){
+      static $tmp;
+        if(is_array($array)) foreach($array as $val) array_flatten($val);
+        else $tmp[] = $array;
+        return $tmp;
+}
