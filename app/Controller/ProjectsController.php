@@ -78,6 +78,7 @@ class ProjectsController extends AppController {
 		if ( $project['project_status_id'] != $pre_status_id ) $this->Project->save($project);
 	    }
 	}
+
 /**
  * index method
  *

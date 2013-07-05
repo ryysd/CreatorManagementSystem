@@ -299,6 +299,13 @@ class OrderLinesController extends AppController {
 			    'class' => 'alert-success'
 			)
 		    );
+		    $order = $orderLine['OrderLine'];
+		    $status = $this->OrderLine->OrderStatus->findById($this->request->data['OrderLine']['order_status_id']);
+		    $illustrators = $orderLine['User'];
+		    $project = $orderLine['Project'];
+
+		    $this->sendNotifyUpdateMails($illustrators, $project, $order, "", $status['OrderStatus']['name']);
+
 		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		} else {
 		    $this->Session->setFlash(
@@ -312,6 +319,32 @@ class OrderLinesController extends AppController {
 		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		}
 	    }
+	}
+
+	public function sendNotifyUpdateMails($toUsers, $project, $order, $order_tab_id, $status) {
+	    foreach ($toUsers as $user) {
+		$this->sendNotifyUpdateMail($user, $project, $order, $order_tab_id, $status);
+	    }
+	}
+
+	public function sendNotifyUpdateMail($toUser, $project, $order, $order_tab_id, $status) {
+	    $to           = $toUser['email'];
+	    $to_name      = $toUser['username'];
+	    $project_name = $project['title'];
+	    $project_url  = Router::url("/", true)."projects/view/".$project['id'];
+	    $illust_name  = $order['title'];
+	    $illust_url   = Router::url("/", true)."order_lines/view/".$order['id'];
+	    
+	    $data = array(
+		'to_name'      => $to_name,
+		'project_name' => $project_name,
+		'project_url'  => $project_url,
+		'illust_name'  => $illust_name,
+		'illust_url'   => $illust_url,
+		'status'       => $status
+	    );
+            $subject = "[PicHub] Illust Status Updated.";
+	    $this->sendEmail($to, $subject, "notify_update_state", "email", $data);
 	}
 	
 	public function delete_attachment($id = null) {
