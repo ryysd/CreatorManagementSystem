@@ -323,17 +323,26 @@ class OrderLinesController extends AppController {
 
 	public function sendNotifyUpdateMails($toUsers, $project, $order, $order_tab_id, $status) {
 	    foreach ($toUsers as $user) {
-		$this->sendNotifyUpdateMail($user, $project, $order, $order_tab_id, $status);
+		$this->sendNotifyMail($user, $project, $order, $order_tab_id, $status, true);
 	    }
 	}
 
-	public function sendNotifyUpdateMail($toUser, $project, $order, $order_tab_id, $status) {
+	public function sendNotifyRollbackMails($toUsers, $project, $order, $order_tab_id, $status) {
+	    foreach ($toUsers as $user) {
+		$this->sendNotifyMail($user, $project, $order, $order_tab_id, $status, false);
+	    }
+	}
+
+	public function sendNotifyMail($toUser, $project, $order, $order_tab_id, $status, $isAccepted) {
 	    $to           = $toUser['email'];
 	    $to_name      = $toUser['username'];
 	    $project_name = $project['title'];
 	    $project_url  = Router::url("/", true)."projects/view/".$project['id'];
 	    $illust_name  = $order['title'];
 	    $illust_url   = Router::url("/", true)."order_lines/view/".$order['id'];
+
+	    $template = $isAccepted ? "notify_update_state" : "notify_rollback_state";
+            $subject  = $isAccepted ? "[PicHub] Illust Status Updated." : "[PicHub] Illust Status RollBacked";
 	    
 	    $data = array(
 		'to_name'      => $to_name,
@@ -343,8 +352,7 @@ class OrderLinesController extends AppController {
 		'illust_url'   => $illust_url,
 		'status'       => $status
 	    );
-            $subject = "[PicHub] Illust Status Updated.";
-	    $this->sendEmail($to, $subject, "notify_update_state", "email", $data);
+	    $this->sendEmail($to, $subject, $template, "email", $data);
 	}
 	
 	public function delete_attachment($id = null) {
@@ -414,6 +422,13 @@ class OrderLinesController extends AppController {
 			    'class' => 'alert-success'
 			)
 		    );
+
+		    $order = $orderLine['OrderLine'];
+		    $status = $this->OrderLine->OrderStatus->findById($orderLine['OrderLine']['order_status_id']);
+		    $illustrators = $orderLine['User'];
+		    $project = $orderLine['Project'];
+
+		    $this->sendNotifyRollbackMails($illustrators, $project, $order, "", $status['OrderStatus']['name']);
 		    $this->redirect(array('action' => 'view', $orderLine['OrderLine']['id']));
 		} else {
 		    $this->Session->setFlash(
