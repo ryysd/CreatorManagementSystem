@@ -31,11 +31,13 @@
                             <div class="hero-unit">
                               <h1>PicHub (beta)</h1>
                               <p>ようこそ, <?php echo h($user['User']['username']); ?> さん</p>
+<!--
                               <p>
                                 <a class="btn btn-primary btn-large">
                                   Learn more
                                 </a>
                               </p>
+-->
                             </div>
 				<div class="um_box_mid_content_mid_right" align="right"></div>
 				<div style="clear:both"></div>

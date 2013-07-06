@@ -108,8 +108,10 @@
 	                                        <?php endif; ?>
 	                                        <?php endif; ?>
 
+	<!--
                                                	<li><a href="<?php echo $this->webroot.'/about' ?>">About</a></li>
 						<li><a href="<?php echo $this->webroot.'/contact' ?>">Contact</a></li>
+-->
 					</ul>
                                         <ul class="nav pull-right">
                                         <li class="dropdown" >
