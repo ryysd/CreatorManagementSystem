@@ -16,6 +16,14 @@
         <?php echo $this->Html->script(array('jquery', 'jquery-ui')); ?>
         <?php echo $this->Html->css('jquery-ui.css'); ?>
         <script>
+
+        $(function() {
+            $('form').submit(function() {
+        	$(this).submit(function () {
+        	    return false;});
+        	});
+        });
+
         jQuery(function($){
 	    $("#datepicker").datepicker({
 		dateFormat: 'yy-mm-dd'

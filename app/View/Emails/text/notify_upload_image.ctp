@@ -7,5 +7,4 @@ FreedomSpeech PicHub運営事務局です。
 ===
 プロジェクト: <?php echo $project_name ?> (<?php echo $project_url ?>)
 イラスト    : <?php echo $illust_name ?> (<?php echo $illust_url ?>)
-イラストID  : <?php echo $illust_id ?>
 ===

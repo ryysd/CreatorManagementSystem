@@ -330,12 +330,15 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
     </div>
 </div>
 <div class='row-fluid'>
-    <?php echo $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal')); ?>
     <fieldset>
-        <?php echo $this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge')); ?>
-        <?php echo $this->BootstrapForm->submit(__('コメントを送信'), array('div' => false)); ?>
-    </fieldset>
+    <?php echo $this->BootstrapForm->create('Comment', array('controller' => 'Comment', 'action' => 'add', 'class' => 'form-horizontal')); ?>
+    <?php echo $this->BootstrapForm->input('content', array('label' => false, 'div' => false, 'required' => 'required', 'class' => 'input-xxlarge')); ?>
+    <?php echo $this->BootstrapForm->submit(__('コメントを送信'), array('div' => false)); ?>
+    <div style="display:none;">
     <?php echo $this->BootstrapForm->hidden('user_id', array('value'=>$authUser['User']['id'])); ?>
     <?php echo $this->BootstrapForm->hidden('order_line_id', array('value'=>$orderLineId)); ?>
+    </div>
     <?php echo $this->BootstrapForm->end(); ?>
+    </fieldset>
 </div>
+

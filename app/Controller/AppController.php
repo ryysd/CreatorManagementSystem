@@ -42,10 +42,19 @@ class AppController extends Controller {
     );
 
     public $layout = 'TwitterBootstrap.default';
-    public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth');
+    public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth', 'Security', 'Cookie');
 
     function beforeFilter() {
 	$this->layout = 'bootstrap';
+	$this->Security->csrfUseOnce = true;
+	$this->Security->blackHoleCallback = 'blackhole';
+	/*
+	$this->Security->requireAuth('Comments');
+	$this->Security->requireAuth('Users');
+	$this->Security->requireAuth('Projects');
+	$this->Security->requireAuth('OrderLines');
+	$this->Security->requireAuth('Attachments');
+	 */
 
 	$this->userAuth();
 	if($this->UserAuth->isLogged()) {
@@ -59,6 +68,19 @@ class AppController extends Controller {
 
     private function userAuth(){
 	$this->UserAuth->beforeFilter($this);
+    }
+
+    public function blackhole($type) {
+	switch($type) {
+	    case 'csrf' : 
+	        setErrorFlush($this->Session, __('Invalid submission.'));
+	        $this->redirect($this->referer());
+	        break;
+	    default :
+	        setErrorFlush($this->Session, __('Black Hole.'));
+	        $this->redirect($this->referer());
+	        break;
+	}
     }
 
     public function sendEmail($to, $subject, $text_template, $layout_template, $data) {
