@@ -26,6 +26,7 @@
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 		                <h2><?php echo __('グループ一覧');?></h2>
+		                <h5 class="label label-important"><?php echo __('変更を加えないで下さい。');?></h5>
 <!--
 				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 -->
