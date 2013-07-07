@@ -128,10 +128,10 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                     <table class="table table-striped">
                     <tr>
                         <td>状態</td>
-                        <?php echo "<td>$status</td>"; ?>
+                        <td>更新日時</td>
                     </tr>
                     <tr>
-                        <td>更新日時</td>
+                        <?php echo "<td>$status</td>"; ?>
                         <?php echo "<td>$modified</td>"; ?>
                     </tr>
                     </table>
@@ -238,7 +238,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                               	'return $x[\'attachment_id\'] == $attachmentId;')
                                   );
                                   if (!empty($attachment_comments)) {
-                                  echo "      <table class=\"table table-striped\">";
+                                  echo "      <table class=\"table table-striped table-hover\">";
                                   echo "        <tr><th nowrap>ユーザー</th><th>コメント</th><th>発言日</th></tr>";
                                                 foreach ($attachment_comments as $comment) {
                                   echo "          <tr>";
@@ -298,7 +298,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
             <?php echo __('%s', __('全体コメント')); ?>
         </h3>
         <?php if (!empty($orderLine['Comment'])):?>
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
         <tr>
             <th nowrap>
                 <?php echo __('ユーザー'); ?>
