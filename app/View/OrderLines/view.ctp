@@ -193,7 +193,7 @@ echo $this->html->scriptBlock($script, array('inline' => false,'safe' => true));
                                                       echo            $this->BootstrapForm->submit(__('左記の状態でイラストを承認'), array('class' => 'btn btn-success', 'div' => false));
                                                   }
                                                   else {
-                                                      echo            $this->BootstrapForm->input('order_status_id', array('options' => $validOrderStatuses, 'div' => false, 'label' => false));
+                                                      echo            $this->BootstrapForm->input('order_status_id', array('options' => $validOrderStatuses, 'disabled' => 'disabled', 'div' => false, 'label' => false));
                                                       echo            $this->BootstrapForm->hidden('main_attachment_id', array('value'=>$attachmentId));
                                                       echo            "<div class=\"btn btn-success disabled\">左記の状態でイラストを承認</div>";
                                                   }
