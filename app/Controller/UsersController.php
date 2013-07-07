@@ -103,7 +103,9 @@ class UsersController extends AppController {
 				);
 			}
 		}
-		$userGroups = $this->User->UserGroup->find('list');
+		$userGroups = $this->User->UserGroup->find('list', array('conditions' => array(
+		    'UserGroup.id >' => GUEST_GROUP_ID
+		)));
 		$this->set(compact('userGroups'));
 	}
 
@@ -142,7 +144,18 @@ class UsersController extends AppController {
 		} else {
 			$this->request->data = $this->User->read(null, $id);
 		}
-		$userGroups = $this->User->UserGroup->find('list');
+		$user = $this->User->findById($id);
+		$userGroup = "";
+		if (isAdminUser($user)) {
+		    $userGroups = $this->User->UserGroup->find('list', array('conditions' => array(
+			'UserGroup.id' => ADMIN_GROUP_ID
+		    )));
+		}
+		else {
+		    $userGroups = $this->User->UserGroup->find('list', array('conditions' => array(
+			'UserGroup.id >' => GUEST_GROUP_ID
+		    )));
+		}
 		$this->set(compact('userGroups'));
 	}
 

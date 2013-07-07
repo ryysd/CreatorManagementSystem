@@ -10,7 +10,7 @@
 			<tr>
 				<th><?php echo $this->BootstrapPaginator->sort('username', '名前');?></th>
 				<th><?php echo $this->BootstrapPaginator->sort('email', 'Email');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('role_id', '属性');?></th>
+				<th><?php echo $this->BootstrapPaginator->sort('group_id', 'グループ');?></th>
 <?php if(isAdminUser($authUser)): ?>
 				<th class="actions"><?php echo __('操作');?></th>
 <?php endif; ?>
@@ -27,7 +27,9 @@
 <?php if(isAdminUser($authUser)): ?>
 				<td class="actions">
 					<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $user['User']['id'])); ?>
+	                                <?php if(!isAdminUser($user)): ?>
 					<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+	                                <?php endif; ?>
 				</td>
 <?php endif; ?>
 			</tr>

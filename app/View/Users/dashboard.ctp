@@ -97,6 +97,14 @@
 </div>
 <?php endif; ?>
 
+<?php if(isAdminUser($authUser)): ?>
+    <div class="alert alert-error">
+		<?php  echo h(__('Adminユーザは、全ての操作が可能です。'));?>
+                <?php echo "<br>" ?>
+		<?php  echo h(__('不用意にデータの削除等を行わないように注意して下さい。'));?>
+    </div>
+<?php endif; ?>
+
 <?php if(isClientUser($authUser)): ?>
 <div class="row-fluid">
 	<div class="span9">

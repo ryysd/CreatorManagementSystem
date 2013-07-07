@@ -159,8 +159,9 @@ class OrderLinesController extends AppController {
 						'class' => 'alert-success'
 					)
 				);
-				if ($project_id != null) {
-				        $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
+				$order = $this->OrderLine->findById($id);
+				if (isset($order['Project'])) {
+				        $this->redirect(array('controller' => 'projects', 'action' => 'view', $order['Project']['id']));
 				    }
 				else {
 				    $this->redirect(array('controller' => 'projects', 'action' => 'index'));
@@ -197,7 +198,7 @@ class OrderLinesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function delete($id = null, $project_id) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
@@ -214,7 +215,7 @@ class OrderLinesController extends AppController {
 					'class' => 'alert-success'
 				)
 			);
-			if ($project_id != null) {
+			if (isset($project_id)) {
 			        $this->redirect(array('controller' => 'projects', 'action' => 'view', $project_id));
 			    }
 			else {
